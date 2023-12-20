@@ -9,7 +9,6 @@ export const AuthProvider = React.memo(({ children }) => {
   const [isGuest, setIsGuest] = useState(false);
 
   const login = (userData) => {
-    // userData is an object, currently with only the username field
     setUser(userData);
     setIsAuthenticated(true);
     setIsGuest(false);
@@ -17,7 +16,7 @@ export const AuthProvider = React.memo(({ children }) => {
   };
 
   const loginAsGuest = () => {
-    setUser(null);
+    setUser("Guest");
     setIsAuthenticated(true);
     setIsGuest(true);
     console.log("Logged in as Guest");
@@ -27,7 +26,7 @@ export const AuthProvider = React.memo(({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
     setIsGuest(false);
-    console.log("logged out");
+    console.log("Logged out");
   };
 
   const contextValue = {

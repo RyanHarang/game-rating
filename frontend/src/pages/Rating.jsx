@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
+import "../css/forms.css";
 import axios from "axios";
 
 export default function Rating() {
@@ -52,7 +53,6 @@ export default function Rating() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here
     if (!username || !game || !score) {
       setMessage(<p className="required">Please fill all fields.</p>);
     } else {
@@ -82,9 +82,14 @@ export default function Rating() {
             name="game"
             value={game}
             onChange={(e) => setGame(e.target.value)}
+            className="field"
           />
           <label>Score</label>
-          <select value={score} onChange={handleScoreChange}>
+          <select
+            value={score}
+            className="select-score"
+            onChange={handleScoreChange}
+          >
             <option value={0}>0</option>
             <option value={0.5}>0.5</option>
             <option value={1}>1</option>

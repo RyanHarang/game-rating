@@ -1,0 +1,46 @@
+.form-container {
+    max-width: 100vh;
+    margin: 0 auto;
+}
+
+.form-title {
+    text-align: center;
+}
+
+.login-form,
+.register-form,
+.rating-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+.field {
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.process {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.process:hover {
+    color: #eee;
+    background-color: #45a049;
+}
+
+.guest-login {
+    margin-top: 10px;
+}
