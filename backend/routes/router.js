@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const schemas = require("../models/schemas");
-const jwt = require("jsonwebtoken");
-require("dotenv/config");
 
 router.post("/rating", async (req, res) => {
   try {
@@ -39,6 +37,7 @@ router.post("/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
+    res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
