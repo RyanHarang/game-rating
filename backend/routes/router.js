@@ -14,12 +14,24 @@ router.post("/rating", async (req, res) => {
   }
 });
 
+router.post("/games", async (req, res) => {
+  try {
+    const { title, site, image } = req.body;
+    const newGame = new schemas.Game({ title, site, image });
+    await newGame.save();
+    res.send("Game added");
+  } catch (error) {
+    console.error("Error saving user:", error);
+    res.status(500).send("Failed to add game");
+  }
+});
+
 router.post("/users", async (req, res) => {
   try {
     const { username, password } = req.body;
     const newUser = new schemas.User({ username, password });
     await newUser.save();
-    res.send("Registered!");
+    res.send("Registered");
   } catch (error) {
     console.error("Error saving user:", error);
     res.status(500).send("Failed to register");

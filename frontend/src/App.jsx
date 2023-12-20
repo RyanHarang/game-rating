@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Rating from "./pages/Rating";
+import AddGame from "./pages/AddGame";
 import GameDetails from "./pages/GameDetails";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/" element={<Login />} />
           <Route path="home" element={<Home />} />
           <Route path="rating" element={<Rating />} />
+          <Route path="add" element={<AddGame />} />
           <Route path="register" element={<Register />} />
           <Route path="game" element={<GameDetails />} />
           <Route path="game/:id" element={<GameDetails />} />

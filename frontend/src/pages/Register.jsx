@@ -27,7 +27,7 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !password) {
-      setMessage(<p className="error">Please fill all fields.</p>);
+      setMessage(<p className="required">Please fill all fields.</p>);
     } else {
       setMessage("");
       axiosPostData();

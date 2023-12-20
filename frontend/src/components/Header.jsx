@@ -16,6 +16,13 @@ export default function Header() {
         </li>
         {!isGuest && (
           <li>
+            <Link to="add" className="link">
+              Add Games
+            </Link>
+          </li>
+        )}
+        {!isGuest && (
+          <li>
             <Link to="rating" className="link">
               Rating
             </Link>
