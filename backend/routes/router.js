@@ -39,22 +39,6 @@ router.post("/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-    const accessToken = jwt.sign(
-      { username: user.username },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "10m" }
-    );
-    const refreshToken = jwt.sign(
-      { username: user.username },
-      process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "35d" }
-    );
-    await schemas.User.updateOne({ _id: user._id }, { refreshToken });
-    res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      maxAge: 35 * 24 * 60 * 60 * 1000,
-    });
-    res.status(200).json({ message: "Login successful", accessToken });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
