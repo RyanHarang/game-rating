@@ -26,6 +26,36 @@ label {
     font-size: 16px;
 }
 
+.custom-select {
+    position: relative;
+    max-width: 100%;
+}
+
+.score-display {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.select-options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 4px;
+}
+
+.option {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.option:hover {
+    background-color: #444;
+}
+
 .process {
     background-color: #4caf50;
     color: white;
