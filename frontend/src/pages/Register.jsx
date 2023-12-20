@@ -4,26 +4,14 @@ import axios from "axios";
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     let processing = true;
-    //axiosFetchData(processing);
     return () => {
       processing = false;
     };
   }, []);
-
-  // const axiosFetchData = async (processing) => {
-  //   await axios
-  //     .get("http://localhost:4000/users")
-  //     .then((res) => {
-  //       if (processing) {
-  //         //setUsername(res.data.username);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   const axiosPostData = async () => {
     const postData = {
@@ -32,15 +20,15 @@ export default function Register() {
     };
     await axios
       .post("http://localhost:4000/users", postData)
-      .then((res) => setError(<p className="success">{res.data}</p>));
+      .then((res) => setMessage(<p className="success">{res.data}</p>));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !password) {
-      setError(<p className="error">Please fill all fields.</p>);
+      setMessage(<p className="error">Please fill all fields.</p>);
     } else {
-      setError("");
+      setMessage("");
       axiosPostData();
     }
   };
@@ -70,9 +58,9 @@ export default function Register() {
           onChange={(e) => setPassword(e.target.value)}
           className="field"
         />
-        {error}
         <button type="submit">Submit</button>
       </form>
+      {message}
     </>
   );
 }

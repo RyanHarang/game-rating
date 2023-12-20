@@ -8,7 +8,7 @@ export default function Login() {
   const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const axiosPostData = async () => {
     const postData = {
@@ -23,15 +23,15 @@ export default function Login() {
 
       if (response.data.message) {
         login(response.data.user);
-        setError(<p className="success">{response.data.message}</p>);
+        setMessage(<p className="success">{response.data.message}</p>);
         setTimeout(() => {
           navigate("/home");
         }, 1000);
       } else {
-        setError(<p className="error">{response.data.error}</p>);
+        setMessage(<p className="error">{response.data.error}</p>);
       }
     } catch (error) {
-      setError(
+      setMessage(
         <p className="error">Failed to log in. Check your credentials.</p>
       );
     }
@@ -40,16 +40,18 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !password) {
-      setError(<p className="required">Please fill all fields.</p>);
+      setMessage(<p className="required">Please fill all fields.</p>);
     } else {
-      setError("");
+      setMessage("");
       axiosPostData();
     }
   };
 
   const handleGuest = () => {
-    // Handle logic for continuing as a guest
-    navigate("/home");
+    setMessage(<p className="message">Continuing as Guest</p>);
+    setTimeout(() => {
+      navigate("/home");
+    }, 1000);
   };
 
   return (
@@ -72,12 +74,12 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error}
         <button type="submit">Login</button>
         <button type="button" onClick={handleGuest}>
           Continue as Guest
         </button>
       </form>
+      {message}
     </>
   );
 }

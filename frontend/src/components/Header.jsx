@@ -22,6 +22,11 @@ export default function Header() {
             Register
           </Link>
         </li>
+        <li>
+          <Link to="/" className="link">
+            Login
+          </Link>
+        </li>
       </ul>
     </nav>
   );

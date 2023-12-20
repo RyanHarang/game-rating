@@ -5,7 +5,7 @@ export default function Rating() {
   const [username, setUsername] = useState("");
   const [game, setGame] = useState("");
   const [score, setScore] = useState(5);
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     let processing = true;
@@ -40,16 +40,16 @@ export default function Rating() {
     };
     await axios
       .post("http://localhost:4000/rating", postData)
-      .then((res) => setError(<p className="success">{res.data}</p>));
+      .then((res) => setMessage(<p className="success">{res.data}</p>));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your form submission logic here
     if (!username || !game || !score) {
-      setError(<p className="required">Please fill all fields.</p>);
+      setMessage(<p className="required">Please fill all fields.</p>);
     } else {
-      setError("");
+      setMessage("");
       axiosPostData();
     }
   };
@@ -98,9 +98,9 @@ export default function Rating() {
           <option value={9.5}>9.5</option>
           <option value={10}>10</option>
         </select>
-        {error}
         <button type="submit">Submit</button>
       </form>
+      {message}
     </>
   );
 }
