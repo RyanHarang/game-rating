@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/AuthContext";
+import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,6 +22,7 @@ export default function Login() {
       );
 
       if (response.data.message) {
+        login(response.data.user);
         setError(<p className="success">{response.data.message}</p>);
         setTimeout(() => {
           navigate("/home");
@@ -44,6 +47,11 @@ export default function Login() {
     }
   };
 
+  const handleGuest = () => {
+    // Handle logic for continuing as a guest
+    navigate("/home");
+  };
+
   return (
     <>
       <h1>Login</h1>
@@ -66,6 +74,9 @@ export default function Login() {
         />
         {error}
         <button type="submit">Login</button>
+        <button type="button" onClick={handleGuest}>
+          Continue as Guest
+        </button>
       </form>
     </>
   );
