@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -9,16 +14,31 @@ import GameDetails from "./pages/GameDetails";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+// Separate component for navigation
+const Navigation = () => {
+  const navigate = useNavigate();
+
+  // Function to determine whether to display the header
+  const shouldDisplayHeader = () => {
+    const currentPath = window.location.pathname;
+    // List of paths where the header should not be displayed
+    const pathsWithoutHeader = ["/"];
+    return !pathsWithoutHeader.includes(currentPath);
+  };
+
+  return shouldDisplayHeader() ? <Header /> : null;
+};
+
 export default function App() {
   return (
     <>
       <Router>
-        <Header />
+        <Navigation />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="home" element={<Home />} />
           <Route path="rating" element={<Rating />} />
           <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
           <Route path="game" element={<GameDetails />} />
           <Route path="game/:id" element={<GameDetails />} />
         </Routes>

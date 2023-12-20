@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -19,6 +21,9 @@ export default function Login() {
 
       if (response.data.message) {
         setError(<p className="success">{response.data.message}</p>);
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
       } else {
         setError(<p className="error">{response.data.error}</p>);
       }

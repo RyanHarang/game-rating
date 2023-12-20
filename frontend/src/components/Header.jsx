@@ -8,7 +8,7 @@ export default function Header() {
       <img className="logo" src={Logo}></img>
       <ul>
         <li>
-          <Link to="/" className="link">
+          <Link to="home" className="link">
             Home
           </Link>
         </li>
@@ -20,11 +20,6 @@ export default function Header() {
         <li>
           <Link to="register" className="link">
             Register
-          </Link>
-        </li>
-        <li>
-          <Link to="login" className="link">
-            Login
           </Link>
         </li>
       </ul>
