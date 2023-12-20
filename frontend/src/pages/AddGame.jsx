@@ -27,6 +27,9 @@ export default function AddGame() {
           },
         }
       );
+      setTitle("");
+      setSite("");
+      setImage(null);
       setMessage(<p className="success">{response.data}</p>);
     } catch (error) {
       setMessage(<p className="error">Failed to add game</p>);

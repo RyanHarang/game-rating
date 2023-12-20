@@ -1,0 +1,36 @@
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px;
+    flex: 1;
+    width: 25%;
+    transition: transform 0.2s;
+}
+
+.card-container:hover {
+    transform: scale(1.05);
+}
+
+.title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.site {
+    color: #555;
+}
+
+.game-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
