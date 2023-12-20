@@ -27,11 +27,6 @@ export default function Header() {
             Login
           </Link>
         </li>
-        <li>
-          <Link to="users" className="link">
-            Users
-          </Link>
-        </li>
       </ul>
     </nav>
   );

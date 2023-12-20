@@ -18,13 +18,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// Apply verifyJWT middleware globally, except for the login route
-app.use((req, res, next) => {
-  if (req.path === "/login") {
-    return next();
-  }
-  verifyJWT(req, res, next);
-});
 app.use("/", router);
 
 mongoose
