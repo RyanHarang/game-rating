@@ -56,51 +56,56 @@ export default function Rating() {
 
   return (
     <>
-      <h1>Rating</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Game</label>
-        <input
-          type="text"
-          id="game"
-          name="game"
-          value={game}
-          onChange={(e) => setGame(e.target.value)}
-        />
-        <label>Score</label>
-        <select value={score} onChange={handleScoreChange}>
-          <option value={0}>0</option>
-          <option value={0.5}>0.5</option>
-          <option value={1}>1</option>
-          <option value={1.5}>1.5</option>
-          <option value={2}>2</option>
-          <option value={2.5}>2.5</option>
-          <option value={3}>3</option>
-          <option value={3.5}>3.5</option>
-          <option value={4}>4</option>
-          <option value={4.5}>4.5</option>
-          <option value={5}>5</option>
-          <option value={5.5}>5.5</option>
-          <option value={6}>6</option>
-          <option value={6.5}>6.5</option>
-          <option value={7}>7</option>
-          <option value={7.5}>7.5</option>
-          <option value={8}>8</option>
-          <option value={8.5}>8.5</option>
-          <option value={9}>9</option>
-          <option value={9.5}>9.5</option>
-          <option value={10}>10</option>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
-      {message}
+      <div className="form-container">
+        <h1 className="form-title">Rating</h1>
+        <form className="rating-form" onSubmit={handleSubmit}>
+          <label>Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="field"
+          />
+          <label>Game</label>
+          <input
+            type="text"
+            id="game"
+            name="game"
+            value={game}
+            onChange={(e) => setGame(e.target.value)}
+          />
+          <label>Score</label>
+          <select value={score} onChange={handleScoreChange}>
+            <option value={0}>0</option>
+            <option value={0.5}>0.5</option>
+            <option value={1}>1</option>
+            <option value={1.5}>1.5</option>
+            <option value={2}>2</option>
+            <option value={2.5}>2.5</option>
+            <option value={3}>3</option>
+            <option value={3.5}>3.5</option>
+            <option value={4}>4</option>
+            <option value={4.5}>4.5</option>
+            <option value={5}>5</option>
+            <option value={5.5}>5.5</option>
+            <option value={6}>6</option>
+            <option value={6.5}>6.5</option>
+            <option value={7}>7</option>
+            <option value={7.5}>7.5</option>
+            <option value={8}>8</option>
+            <option value={8.5}>8.5</option>
+            <option value={9}>9</option>
+            <option value={9.5}>9.5</option>
+            <option value={10}>10</option>
+          </select>
+          <button type="submit" className="process">
+            Submit
+          </button>
+        </form>
+        {message}
+      </div>
     </>
   );
 }

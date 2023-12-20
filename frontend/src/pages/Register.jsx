@@ -35,32 +35,36 @@ export default function Register() {
 
   return (
     <>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          required
-          type="text"
-          id="username"
-          name="username"
-          autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="field"
-        />
-        <label>Password</label>
-        <input
-          required
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="field"
-        />
-        <button type="submit">Submit</button>
-      </form>
-      {message}
+      <div className="form-container">
+        <h1 className="form-title">Register</h1>
+        <form className="register-form" onSubmit={handleSubmit}>
+          <label>Username</label>
+          <input
+            required
+            type="text"
+            id="username"
+            name="username"
+            autoComplete="off"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="field"
+          />
+          <label>Password</label>
+          <input
+            required
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="field"
+          />
+          <button type="submit" className="process">
+            Submit
+          </button>
+        </form>
+        {message}
+      </div>
     </>
   );
 }

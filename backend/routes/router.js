@@ -7,10 +7,10 @@ router.post("/rating", async (req, res) => {
     const { username, game, score } = req.body;
     const newRating = new schemas.Rating({ username, game, score });
     await newRating.save();
-    res.send("Rating sent!");
+    res.send("Rating sent");
   } catch (error) {
     console.error("Error saving rating:", error);
-    res.status(500).send("Failed to send rating.");
+    res.status(500).send("Failed to send rating");
   }
 });
 
@@ -22,7 +22,7 @@ router.post("/users", async (req, res) => {
     res.send("Registered!");
   } catch (error) {
     console.error("Error saving user:", error);
-    res.status(500).send("Failed to register.");
+    res.status(500).send("Failed to register");
   }
 });
 

@@ -55,12 +55,68 @@ body {
   width: 250px;
 }
 
+/* Forms */
+.form-container {
+  max-width: 400px;
+  /* Adjust the max-width based on your design */
+  margin: 0 auto;
+}
+
+.form-title {
+  text-align: center;
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+.field {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.process {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.process:hover {
+  background-color: #45a049;
+}
+
+/* Additional styling for the "Continue as Guest" button */
+.process.guest {
+  background-color: #007bff;
+}
+
+.process.guest:hover {
+  background-color: #0056b3;
+}
+
 .field:focus {
   outline: 1px solid #ccc;
 }
 
 .message {
   color: #ccc;
+}
+
+.required {
+  color: #ff0048;
 }
 
 .error {

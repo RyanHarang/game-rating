@@ -31,16 +31,14 @@ export default function Login() {
         setMessage(<p className="error">{response.data.error}</p>);
       }
     } catch (error) {
-      setMessage(
-        <p className="error">Failed to log in. Check your credentials.</p>
-      );
+      setMessage(<p className="error">Failed to log in</p>);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !password) {
-      setMessage(<p className="required">Please fill all fields.</p>);
+      setMessage(<p className="required">Please fill all fields</p>);
     } else {
       setMessage("");
       axiosPostData();
@@ -56,30 +54,37 @@ export default function Login() {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-        <button type="button" onClick={handleGuest}>
-          Continue as Guest
-        </button>
-      </form>
-      {message}
+      <div className="form-container">
+        <h1 className="form-title">Login</h1>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label>Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="off"
+            className="field"
+          />
+          <label>Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="field"
+          />
+          <button type="submit" className="process">
+            Login
+          </button>
+          <button type="button" className="process" onClick={handleGuest}>
+            Continue as Guest
+          </button>
+        </form>
+        {message}
+      </div>
     </>
   );
 }
