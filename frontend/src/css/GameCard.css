@@ -23,7 +23,10 @@
 
 .title {
     margin-top: 5px;
-    font-size: 1.25rem;
+    font-size: 1.25vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     margin-bottom: 8px;
 }
 
