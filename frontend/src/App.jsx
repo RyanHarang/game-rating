@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./css/App.css";
-import Home from "./pages/Home";
+import GameList from "./pages/GameList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Rating from "./pages/Rating";
@@ -17,7 +17,7 @@ export default function App() {
         <Navigation />
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="home" element={<Home />} />
+          <Route path="list" element={<GameList />} />
           <Route path="rating" element={<Rating />} />
           <Route path="add" element={<AddGame />} />
           <Route path="register" element={<Register />} />

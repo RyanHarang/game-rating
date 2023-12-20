@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import GameCard from "../components/GameCard";
 import "../css/GameCard.css";
 import axios from "axios";
-// import g1 from "../assets/images/g1.jpg";
-// import g2 from "../assets/images/g2.jpg";
 
-export default function Home() {
+export default function GameList() {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
@@ -23,7 +21,6 @@ export default function Home() {
 
   return (
     <>
-      <h1>Home</h1>
       <div className="card-grid">
         {games.map((game) => (
           <GameCard key={game._id} game={game} />

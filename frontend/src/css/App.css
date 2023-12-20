@@ -22,37 +22,15 @@ body {
 .link {
   font-size: 1.5rem;
   text-decoration: none;
-  color: #dd47af;
+  color: #bbb;
+}
+
+.link:hover {
+  color: #ddd;
 }
 
 .logo {
   height: 4rem;
-}
-
-.game-box {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-}
-
-.game-box li {
-  text-align: center;
-}
-
-.game-box a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.game-box a:hover {
-  color: #999;
-}
-
-.game-image {
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  width: 250px;
 }
 
 .field:focus {

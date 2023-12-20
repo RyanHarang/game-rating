@@ -10,8 +10,8 @@ export default function Header() {
       <img className="logo" src={Logo}></img>
       <ul>
         <li>
-          <Link to="home" className="link">
-            Home
+          <Link to="list" className="link">
+            Games
           </Link>
         </li>
         {!isGuest && (
