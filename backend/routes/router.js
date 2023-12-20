@@ -40,13 +40,23 @@ router.post("/games", upload.single("image"), async (req, res) => {
     const newGame = new schemas.Game({
       title,
       site,
-      imageUrl: `http://localhost:4000/uploads/${req.file.filename}`,
+      imageUrl: `http://localhost:4000/images/${req.file.filename}`,
     });
     await newGame.save();
     res.send("Game added");
   } catch (error) {
     console.error("Error adding game:", error);
     res.status(500).send("Failed to add game");
+  }
+});
+
+router.get("/games", async (req, res) => {
+  try {
+    const games = await schemas.Game.find();
+    res.json(games);
+  } catch (error) {
+    console.error("Error fetching games:", error);
+    res.status(500).send("Failed to fetch games");
   }
 });
 

@@ -1,12 +1,13 @@
+import React from "react";
+
 const GameCard = ({ game }) => {
-  const imageData = game.image;
-  const imageUrl = `data:image/png;base64,${imageData}`;
+  const imageUrl = game.imageUrl;
 
   return (
     <div>
       <h2>{game.title}</h2>
       <p>{game.site}</p>
-      <img src={imageUrl} alt={game.title} />
+      <img src={imageUrl} alt={game.title} loading="lazy" />
     </div>
   );
 };

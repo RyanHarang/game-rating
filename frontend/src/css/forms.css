@@ -1,5 +1,5 @@
 .form-container {
-    max-width: 100vh;
+    max-width: 50vh;
     margin: 0 auto;
 }
 
@@ -49,6 +49,7 @@ label {
 }
 
 .option {
+    width: 1.75vh;
     cursor: pointer;
     padding: 10px;
 }
