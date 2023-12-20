@@ -3,13 +3,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const router = require("./routes/router");
 const mongoose = require("mongoose");
-const verifyJWT = require("./middleware/verifyJWT");
 require("dotenv/config");
 
 const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 const corsOptions = {
   origin: "*",
@@ -18,6 +14,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/", router);
 
 mongoose
