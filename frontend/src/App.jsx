@@ -14,11 +14,8 @@ import GameDetails from "./pages/GameDetails";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// Separate component for navigation
 const Navigation = () => {
   const navigate = useNavigate();
-
-  // Function to determine whether to display the header
   const shouldDisplayHeader = () => {
     const currentPath = window.location.pathname;
     // List of paths where the header should not be displayed

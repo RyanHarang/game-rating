@@ -37,10 +37,8 @@ router.post("/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-    const userData = {
-      username: user.username,
-    };
-    res.status(200).json({ message: "Login successful", user: userData });
+
+    res.status(200).json({ message: "Login successful", user: user.username });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

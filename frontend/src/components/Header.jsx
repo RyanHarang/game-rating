@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../components/AuthContext";
 import Logo from "../assets/images/logo.png";
 
 export default function Header() {
+  const { logout } = useAuth();
   return (
     <nav className="nav-bar">
       <img className="logo" src={Logo}></img>
@@ -23,7 +25,7 @@ export default function Header() {
           </Link>
         </li>
         <li>
-          <Link to="/" className="link">
+          <Link to="/" className="link" onClick={() => logout()}>
             Login
           </Link>
         </li>
