@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../components/AuthContext";
 import axios from "axios";
 
 export default function Rating() {
+  const { isGuest } = useAuth();
   const [username, setUsername] = useState("");
   const [game, setGame] = useState("");
   const [score, setScore] = useState(5);
@@ -14,6 +16,11 @@ export default function Rating() {
       processing = false;
     };
   }, []);
+
+  if (isGuest) {
+    // Redirect or show a message for guests
+    return <p>You do not have access to the ratings page as a guest.</p>;
+  }
 
   const handleScoreChange = (e) => {
     // Update the score state when the user selects a value

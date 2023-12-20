@@ -6,23 +6,36 @@ const AuthContext = createContext();
 export const AuthProvider = React.memo(({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [isGuest, setIsGuest] = useState(false);
 
   const login = (userData) => {
+    // userData is an object, currently with only the username field
     setUser(userData);
     setIsAuthenticated(true);
-    console.log(userData.username + " logged in");
+    setIsGuest(false);
+    console.log(userData + " logged in");
+  };
+
+  const loginAsGuest = () => {
+    setUser(null);
+    setIsAuthenticated(true);
+    setIsGuest(true);
+    console.log("Logged in as Guest");
   };
 
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
+    setIsGuest(false);
     console.log("logged out");
   };
 
   const contextValue = {
     isAuthenticated,
     user,
+    isGuest,
     login,
+    loginAsGuest,
     logout,
   };
 

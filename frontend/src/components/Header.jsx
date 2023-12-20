@@ -4,7 +4,7 @@ import { useAuth } from "../components/AuthContext";
 import Logo from "../assets/images/logo.png";
 
 export default function Header() {
-  const { logout } = useAuth();
+  const { logout, isGuest } = useAuth();
   return (
     <nav className="nav-bar">
       <img className="logo" src={Logo}></img>
@@ -14,11 +14,13 @@ export default function Header() {
             Home
           </Link>
         </li>
-        <li>
-          <Link to="rating" className="link">
-            Rating
-          </Link>
-        </li>
+        {!isGuest && (
+          <li>
+            <Link to="rating" className="link">
+              Rating
+            </Link>
+          </li>
+        )}
         <li>
           <Link to="register" className="link">
             Register

@@ -95,16 +95,12 @@ label {
 }
 
 .process:hover {
+  color: #eee;
   background-color: #45a049;
 }
 
-/* Additional styling for the "Continue as Guest" button */
-.process.guest {
-  background-color: #007bff;
-}
-
-.process.guest:hover {
-  background-color: #0056b3;
+.guest-login {
+  margin-top: 10px;
 }
 
 .field:focus {

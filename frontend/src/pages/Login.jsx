@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loginAsGuest } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -47,6 +47,7 @@ export default function Login() {
 
   const handleGuest = () => {
     setMessage(<p className="message">Continuing as Guest</p>);
+    loginAsGuest();
     setTimeout(() => {
       navigate("/home");
     }, 1000);
@@ -79,7 +80,11 @@ export default function Login() {
           <button type="submit" className="process">
             Login
           </button>
-          <button type="button" className="process" onClick={handleGuest}>
+          <button
+            type="button"
+            className="process guest-login"
+            onClick={handleGuest}
+          >
             Continue as Guest
           </button>
         </form>
