@@ -2,7 +2,7 @@
 .env
 
 #images
-backend/images/
+backend/images
 
 # Logs
 logs
