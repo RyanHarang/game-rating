@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 
+// IMPORTANT
+// One way to potentially handle the login is to simply not render the Header component from the login page
+// and have the 'Submit' button link to the home page if the username & password meet the set requirements.
+// This probably wouldn't solve any issues relating to user accounts and people being able to rate things
+// from their account, so something like JWT would probably still be needed in addition to the above logic
+// to allow for user authetication.
+
 export default function Login() {
-  const navigate = useNavigate();
   const { setAuth } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,8 +31,6 @@ export default function Login() {
 
       if (response.data.message) {
         setError(<p className="success">{response.data.message}</p>);
-        setAuth(true);
-        navigate("/");
       } else {
         setError(<p className="error">{response.data.error}</p>);
       }

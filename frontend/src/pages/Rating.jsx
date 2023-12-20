@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie"; // Import js-cookie library
 
 export default function Rating() {
   const [username, setUsername] = useState("");
@@ -8,9 +7,30 @@ export default function Rating() {
   const [score, setScore] = useState(5);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    let processing = true;
+    //axiosFetchData(processing);
+    return () => {
+      processing = false;
+    };
+  }, []);
+
   const handleScoreChange = (e) => {
+    // Update the score state when the user selects a value
     setScore(parseFloat(e.target.value));
   };
+
+  // eventually I'll need to use something similar to this to pull from a game list I think
+  // const axiosFetchData = async (processing) => {
+  //   await axios
+  //     .get("http://localhost:4000/users")
+  //     .then((res) => {
+  //       if (processing) {
+  //         setScore(res.data.score);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   const axiosPostData = async () => {
     const postData = {
@@ -18,23 +38,14 @@ export default function Rating() {
       game: game,
       score: score,
     };
-    const authToken = Cookies.get("authToken"); // Use Cookies.get() instead of document.cookie
-
-    try {
-      await axios.post("http://localhost:4000/rating", postData, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      setError(<p className="success">Rating sent!</p>);
-    } catch (error) {
-      console.error("Error sending rating:", error);
-      setError(<p className="error">Failed to send rating.</p>);
-    }
+    await axios
+      .post("http://localhost:4000/rating", postData)
+      .then((res) => setError(<p className="success">{res.data}</p>));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Add your form submission logic here
     if (!username || !game || !score) {
       setError(<p className="required">Please fill all fields.</p>);
     } else {
@@ -65,27 +76,27 @@ export default function Rating() {
         />
         <label>Score</label>
         <select value={score} onChange={handleScoreChange}>
-          <option>0</option>
-          <option>0.5</option>
-          <option>1</option>
-          <option>1.5</option>
-          <option>2</option>
-          <option>2.5</option>
-          <option>3</option>
-          <option>3.5</option>
-          <option>4</option>
-          <option>4.5</option>
-          <option>5</option>
-          <option>5.5</option>
-          <option>6</option>
-          <option>6.5</option>
-          <option>7</option>
-          <option>7.5</option>
-          <option>8</option>
-          <option>8.5</option>
-          <option>9</option>
-          <option>9.5</option>
-          <option>10</option>
+          <option value={0}>0</option>
+          <option value={0.5}>0.5</option>
+          <option value={1}>1</option>
+          <option value={1.5}>1.5</option>
+          <option value={2}>2</option>
+          <option value={2.5}>2.5</option>
+          <option value={3}>3</option>
+          <option value={3.5}>3.5</option>
+          <option value={4}>4</option>
+          <option value={4.5}>4.5</option>
+          <option value={5}>5</option>
+          <option value={5.5}>5.5</option>
+          <option value={6}>6</option>
+          <option value={6.5}>6.5</option>
+          <option value={7}>7</option>
+          <option value={7.5}>7.5</option>
+          <option value={8}>8</option>
+          <option value={8.5}>8.5</option>
+          <option value={9}>9</option>
+          <option value={9.5}>9.5</option>
+          <option value={10}>10</option>
         </select>
         {error}
         <button type="submit">Submit</button>
