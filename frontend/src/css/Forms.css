@@ -1,3 +1,4 @@
+/* General Form Styling */
 .form-container {
     max-width: 25vw;
     margin: 0 auto;
@@ -36,6 +37,27 @@ label {
     max-width: 100%;
 }
 
+.process {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.process:hover {
+    color: #eee;
+    background-color: #45a049;
+}
+
+/* Login Form */
+.guest-login {
+    margin-top: 10px;
+}
+
+/* Rating Form */
 .score-display {
     padding: 8px;
     border: 1px solid #ccc;
@@ -62,23 +84,4 @@ input[type="range"] {
     height: 8px;
     border-radius: 2px;
     background-color: #bbb;
-}
-
-.process {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.process:hover {
-    color: #eee;
-    background-color: #45a049;
-}
-
-.guest-login {
-    margin-top: 10px;
 }
