@@ -4,8 +4,7 @@ import "../css/forms.css";
 import axios from "axios";
 
 export default function Rating() {
-  const { isGuest } = useAuth();
-  const [username, setUsername] = useState("");
+  const { isGuest, user } = useAuth();
   const [gameOptions, setGameOptions] = useState([]);
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [game, setGame] = useState("");
@@ -35,7 +34,8 @@ export default function Rating() {
   };
 
   const handleGameChange = (e) => {
-    setGame(e.target.value);
+    const selectedGame = e.target.value;
+    setGame(selectedGame);
   };
 
   const handleSearch = (e) => {
@@ -48,7 +48,7 @@ export default function Rating() {
 
   const axiosPostData = async () => {
     const postData = {
-      username: username,
+      username: user,
       game: game,
       score: score,
     };
@@ -58,6 +58,8 @@ export default function Rating() {
         postData
       );
       setMessage(<p className="success">{response.data}</p>);
+      setScore(5);
+      setGame("");
     } catch (error) {
       console.error("Error posting rating:", error);
       setMessage(<p className="error">Failed to submit rating</p>);
@@ -66,7 +68,7 @@ export default function Rating() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username || !game || !score) {
+    if (!game || !score) {
       setMessage(<p className="required">Please fill all fields.</p>);
     } else {
       setMessage("");
@@ -79,15 +81,6 @@ export default function Rating() {
       <div className="form-container">
         <h1 className="form-title">Rating</h1>
         <form className="rating-form" onSubmit={handleSubmit}>
-          <label>Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="field"
-          />
           <label>Game</label>
           <input
             type="text"

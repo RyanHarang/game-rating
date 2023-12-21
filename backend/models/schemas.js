@@ -22,7 +22,7 @@ const gameSchema = new Schema({
 });
 // name, schema, database
 const User = mongoose.model("User", userSchema, "users");
-const Rating = mongoose.model("Rating", ratingSchema, "rating_form");
+const Rating = mongoose.model("Rating", ratingSchema, "ratings");
 const Game = mongoose.model("Game", gameSchema, "games");
 const mySchemas = { User: User, Rating: Rating, Game: Game };
 
