@@ -83,7 +83,7 @@ export default function Rating() {
       <div className="form-container">
         <h1 className="form-title">Rating</h1>
         {isGuest || !isAuthenticated ? (
-          <p>You do not have access to the ratings page as a guest.</p>
+          <p>You can not submit ratings as a guest.</p>
         ) : (
           <form className="rating-form" onSubmit={handleSubmit}>
             <label>Game</label>

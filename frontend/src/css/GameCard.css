@@ -18,7 +18,7 @@
 }
 
 .card-container:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .title {
@@ -36,7 +36,7 @@
 }
 
 .site:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
     color: #ddd;
 }
 

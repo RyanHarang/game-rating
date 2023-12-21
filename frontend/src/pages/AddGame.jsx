@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useAuth } from "../components/AuthContext";
 import axios from "axios";
 
 export default function AddGame() {
+  const { isGuest, isAuthenticated } = useAuth();
   const [title, setTitle] = useState("");
   const [site, setSite] = useState("");
   const [image, setImage] = useState(null);
@@ -50,42 +52,46 @@ export default function AddGame() {
     <>
       <div className="form-container">
         <h1 className="form-title">Add Game</h1>
-        <form className="game-form" onSubmit={handleSubmit}>
-          <label>Title</label>
-          <input
-            required
-            type="text"
-            id="title"
-            name="title"
-            autoComplete="off"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="field"
-          />
-          <label>Site</label>
-          <input
-            required
-            type="text"
-            id="site"
-            name="site"
-            value={site}
-            onChange={(e) => setSite(e.target.value)}
-            className="field"
-          />
-          <label>Image</label>
-          <input
-            required
-            type="file"
-            id="image"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="field"
-          />
-          <button type="submit" className="process">
-            Submit
-          </button>
-        </form>
+        {isGuest || !isAuthenticated ? (
+          <p>You can not add games as a guest.</p>
+        ) : (
+          <form className="game-form" onSubmit={handleSubmit}>
+            <label>Title</label>
+            <input
+              required
+              type="text"
+              id="title"
+              name="title"
+              autoComplete="off"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="field"
+            />
+            <label>Site</label>
+            <input
+              required
+              type="text"
+              id="site"
+              name="site"
+              value={site}
+              onChange={(e) => setSite(e.target.value)}
+              className="field"
+            />
+            <label>Image</label>
+            <input
+              required
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="field"
+            />
+            <button type="submit" className="process">
+              Submit
+            </button>
+          </form>
+        )}
         {message}
       </div>
     </>
