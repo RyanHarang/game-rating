@@ -9,7 +9,7 @@ export default function Rating() {
   const [gameOptions, setGameOptions] = useState([]);
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [game, setGame] = useState("");
-  const [score, setScore] = useState(5);
+  const [score, setScore] = useState(5); // Set an initial value for the slider
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function Rating() {
         postData
       );
       setMessage(<p className="success">{response.data}</p>);
-      setScore(5);
+      setScore(5); // Reset the slider value after submitting
       setGame("");
     } catch (error) {
       console.error("Error posting rating:", error);
@@ -83,7 +83,7 @@ export default function Rating() {
       <div className="form-container">
         <h1 className="form-title">Rating</h1>
         {isGuest || !isAuthenticated ? (
-          <p>You can not submit ratings as a guest.</p>
+          <p>You cannot submit ratings as a guest.</p>
         ) : (
           <form className="rating-form" onSubmit={handleSubmit}>
             <label>Game</label>
@@ -116,24 +116,16 @@ export default function Rating() {
               </select>
             )}
             <label>Score</label>
-            <div className="custom-select">
-              <div className="score-display">
-                <span>{score}</span>
-              </div>
-              <div className="select-options">
-                {[...Array(21).keys()].map((value) => (
-                  <div
-                    key={value}
-                    className="option"
-                    onClick={() =>
-                      handleScoreChange({ target: { value: value / 2 } })
-                    }
-                  >
-                    {value / 2}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <span className="score-display">{score}</span>
+            <input
+              type="range"
+              min="0"
+              max="10"
+              step="0.5"
+              value={score}
+              onChange={handleScoreChange}
+              className="score-slider"
+            />
             <button type="submit" className="process">
               Submit
             </button>
