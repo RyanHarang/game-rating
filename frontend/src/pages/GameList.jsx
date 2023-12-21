@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import GameCard from "../components/GameCard";
 import "../css/GameCard.css";
 import axios from "axios";
@@ -22,7 +21,7 @@ export default function GameList() {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="loading">Loading...</p>;
   }
 
   return (
@@ -32,18 +31,6 @@ export default function GameList() {
           <GameCard key={game._id} game={game} />
         ))}
       </div>
-      {/* <ul className="game-box">
-        <li>
-          <Link to="/game/1" className="game">
-            <img className="game-image" src={g1} alt="Game one" />
-          </Link>
-        </li>
-        <li>
-          <Link to="/game/2" className="game">
-            <img className="game-image" src={g2} alt="Game two" />
-          </Link>
-        </li>
-      </ul> */}
     </>
   );
 }

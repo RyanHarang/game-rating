@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../components/AuthContext";
+import "../css/Forms.css";
 import axios from "axios";
 
 export default function AddGame() {

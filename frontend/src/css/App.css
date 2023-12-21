@@ -19,13 +19,13 @@ body {
   padding-left: 3rem;
 }
 
-.link {
+.nav-link {
   font-size: 1.5rem;
   text-decoration: none;
   color: #bbb;
 }
 
-.link:hover {
+.nav-link:hover {
   color: #ddd;
 }
 
@@ -35,6 +35,11 @@ body {
 
 .field:focus {
   outline: 1px solid #ccc;
+}
+
+.loading {
+  color: #ccc;
+  font-size: 2vw;
 }
 
 .message {

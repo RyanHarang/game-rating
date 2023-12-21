@@ -10,31 +10,31 @@ export default function Header() {
       <img className="logo" src={Logo}></img>
       <ul>
         <li>
-          <Link to="list" className="link">
+          <Link to="list" className="nav-link">
             Games
           </Link>
         </li>
         {!isGuest && (
           <li>
-            <Link to="add" className="link">
+            <Link to="add" className="nav-link">
               Add Games
             </Link>
           </li>
         )}
         {!isGuest && (
           <li>
-            <Link to="rating" className="link">
+            <Link to="rating" className="nav-link">
               Rating
             </Link>
           </li>
         )}
         <li>
-          <Link to="register" className="link">
+          <Link to="register" className="nav-link">
             Register
           </Link>
         </li>
         <li>
-          <Link to="/" className="link" onClick={() => logout()}>
+          <Link to="/" className="nav-link" onClick={() => logout()}>
             Login
           </Link>
         </li>

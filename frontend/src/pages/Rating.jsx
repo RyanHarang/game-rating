@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
-import "../css/forms.css";
+import "../css/Forms.css";
 import axios from "axios";
 
 export default function Rating() {
@@ -75,7 +75,7 @@ export default function Rating() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="loading">Loading...</p>;
   }
 
   return (

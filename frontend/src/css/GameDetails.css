@@ -1,0 +1,11 @@
+.details-title {
+    margin: 5px 0;
+    font-size: 3vw;
+}
+
+.details-image {
+    width: 20vw;
+    height: 20vh;
+    object-fit: cover;
+    border-radius: 3px;
+}

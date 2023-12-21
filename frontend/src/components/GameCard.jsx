@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../css/GameCard.css";
 
 const GameCard = ({ game }) => {
@@ -7,12 +8,14 @@ const GameCard = ({ game }) => {
       <a className="site" href={game.site} target="_blank">
         <h3 className="title">{game.title}</h3>
       </a>
-      <img
-        src={game.imageUrl}
-        alt={game.title}
-        loading="lazy"
-        className="game-image"
-      />
+      <Link to={`/game/${game.title}`} className="game-link">
+        <img
+          src={game.imageUrl}
+          alt={game.title}
+          loading="lazy"
+          className="game-image"
+        />
+      </Link>
     </div>
   );
 };

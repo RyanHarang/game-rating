@@ -1,36 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "../css/GameDetails.css";
+import axios from "axios";
 
 export default function GameDetails() {
-  const params = useParams();
-  let gameData = null;
+  const { name } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [gameData, setGameData] = useState(null);
 
-  // DB lookup
-  if (params.id === "1") {
-    gameData = {
-      name: "Game One",
-      price: 40.0,
-      image: "../assets/images/g1",
+  useEffect(() => {
+    const fetchGameData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/game/${name}`);
+        setGameData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching game details:", error);
+      }
     };
+
+    fetchGameData();
+  }, [name]);
+
+  if (loading) {
+    return <p className="loading">Loading...</p>;
   }
+
   return (
     <>
-      <h1>Game Details</h1>
-      <p>Game ID: {params.id}</p>
-      {gameData != null ? (
-        <>
-          <img
-            src={gameData.image}
-            alt={gameData.name}
-            className="game-image"
-          />
-          <h2>
-            Name : {gameData.name} Price: {gameData.price}
-          </h2>
-        </>
-      ) : (
-        "No Game Data Found"
-      )}
+      <div className="game-details">
+        {gameData ? (
+          <>
+            <h1 className="details-title">{name}</h1>
+            <img
+              src={gameData.imageUrl}
+              alt={gameData.title}
+              className="details-image"
+            />
+          </>
+        ) : (
+          "No Game Data Found"
+        )}
+      </div>
     </>
   );
 }

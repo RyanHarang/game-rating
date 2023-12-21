@@ -17,12 +17,11 @@ export default function App() {
         <Navigation />
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="list" element={<GameList />} />
-          <Route path="rating" element={<Rating />} />
-          <Route path="add" element={<AddGame />} />
-          <Route path="register" element={<Register />} />
-          <Route path="game" element={<GameDetails />} />
-          <Route path="game/:id" element={<GameDetails />} />
+          <Route path="/list" element={<GameList />} />
+          <Route path="/rating" element={<Rating />} />
+          <Route path="/add" element={<AddGame />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/game/:name" element={<GameDetails />} />
         </Routes>
         <Footer />
       </BrowserRouter>

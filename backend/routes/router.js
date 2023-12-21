@@ -5,6 +5,20 @@ const path = require("path");
 const fs = require("fs");
 const schemas = require("../models/schemas");
 
+router.get("/game/:name", async (req, res) => {
+  const name = req.params.name;
+  try {
+    const game = await schemas.Game.findOne({ title: name });
+    if (!game) {
+      return res.status(404).json({ message: "Game not found" });
+    }
+    res.json(game);
+  } catch (error) {
+    console.error("Error fetching game details:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 router.post("/rating", async (req, res) => {
   try {
     const { username, game, score } = req.body;
