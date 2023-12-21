@@ -6,7 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = React.memo(({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
-  const [isGuest, setIsGuest] = useState(false);
+  const [isGuest, setIsGuest] = useState(true);
 
   const login = (userData) => {
     setUser(userData);
@@ -25,7 +25,7 @@ export const AuthProvider = React.memo(({ children }) => {
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
-    setIsGuest(false);
+    setIsGuest(true);
     console.log("Logged out");
   };
 

@@ -7,13 +7,6 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    let processing = true;
-    return () => {
-      processing = false;
-    };
-  }, []);
-
   const axiosPostData = async () => {
     const postData = {
       username: username,
