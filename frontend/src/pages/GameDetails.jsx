@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../css/GameDetails.css";
 import axios from "axios";
 
@@ -37,6 +37,9 @@ export default function GameDetails() {
   return (
     <>
       <div className="game-details">
+        <Link to="/list" className="back-link">
+          &#8592;
+        </Link>
         {gameData ? (
           <>
             <h1 className="details-title">{name}</h1>
