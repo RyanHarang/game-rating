@@ -6,7 +6,7 @@ body {
 .nav-bar {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   background: rgba(55, 55, 55, 0.4);
 }
 
@@ -30,7 +30,8 @@ body {
 }
 
 .logo {
-  height: 4rem;
+  margin: auto 0;
+  height: 3rem;
 }
 
 .footer {

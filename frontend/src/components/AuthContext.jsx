@@ -12,21 +12,18 @@ export const AuthProvider = React.memo(({ children }) => {
     setUser(userData);
     setIsAuthenticated(true);
     setIsGuest(false);
-    console.log(userData + " logged in");
   };
 
   const loginAsGuest = () => {
     setUser("Guest");
     setIsAuthenticated(true);
     setIsGuest(true);
-    console.log("Logged in as Guest");
   };
 
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
     setIsGuest(true);
-    console.log("Logged out");
   };
 
   const contextValue = {

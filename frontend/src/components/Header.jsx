@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
-import Logo from "../assets/images/logo.png";
+import Logo from "../../public/logo.png";
 
 export default function Header() {
   const { logout, isGuest } = useAuth();
