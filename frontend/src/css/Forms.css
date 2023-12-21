@@ -27,6 +27,10 @@ label {
     font-size: 16px;
 }
 
+.field:focus {
+    outline: 1px solid #ccc;
+}
+
 .custom-select {
     position: relative;
     max-width: 100%;

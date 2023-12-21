@@ -9,3 +9,14 @@
     object-fit: cover;
     border-radius: 3px;
 }
+
+.rating-list {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+}
+
+.rating-list li {
+    margin: 5px 0;
+
+}

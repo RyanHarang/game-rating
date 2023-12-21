@@ -12,7 +12,8 @@ router.get("/game/:name", async (req, res) => {
     if (!game) {
       return res.status(404).json({ message: "Game not found" });
     }
-    res.json(game);
+    const ratings = await schemas.Rating.find({ game: name });
+    res.json({ game, ratings });
   } catch (error) {
     console.error("Error fetching game details:", error);
     res.status(500).json({ message: "Internal server error" });

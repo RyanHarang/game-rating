@@ -22,6 +22,14 @@ export default function GameDetails() {
     fetchGameData();
   }, [name]);
 
+  const calculateAverageRating = () => {
+    const { ratings } = gameData;
+    if (ratings.length === 0) return 0;
+
+    const totalScore = ratings.reduce((sum, rating) => sum + rating.score, 0);
+    return totalScore / ratings.length;
+  };
+
   if (loading) {
     return <p className="loading">Loading...</p>;
   }
@@ -33,10 +41,21 @@ export default function GameDetails() {
           <>
             <h1 className="details-title">{name}</h1>
             <img
-              src={gameData.imageUrl}
-              alt={gameData.title}
+              src={gameData.game.imageUrl}
+              alt={gameData.game.title}
               className="details-image"
             />
+            {gameData.ratings.length > 0 && (
+              <h3>Average Rating: {calculateAverageRating().toFixed(2)}</h3>
+            )}
+            <h3>Ratings:</h3>
+            <ul className="rating-list">
+              {gameData.ratings.map((rating) => (
+                <li key={rating._id}>
+                  {rating.username}: {rating.score}
+                </li>
+              ))}
+            </ul>
           </>
         ) : (
           "No Game Data Found"
