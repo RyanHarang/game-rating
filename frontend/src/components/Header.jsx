@@ -7,7 +7,7 @@ export default function Header() {
   const { logout, isGuest } = useAuth();
   return (
     <nav className="nav-bar">
-      <img className="logo" src={Logo}></img>
+      <img className="logo" src={Logo} alt="dice-logo" />
       <ul>
         <li>
           <Link to="list" className="nav-link">
