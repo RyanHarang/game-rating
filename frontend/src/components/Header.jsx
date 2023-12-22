@@ -4,10 +4,11 @@ import { useAuth } from "../components/AuthContext";
 import Logo from "../../public/logo.png";
 
 export default function Header() {
-  const { logout, isGuest } = useAuth();
+  const { logout, isGuest, user } = useAuth();
   return (
     <nav className="nav-bar">
       <img className="logo" src={Logo} alt="dice-logo" />
+      {isGuest ? <p className="user">Guest</p> : <p className="user">{user}</p>}
       <ul>
         <li>
           <Link to="/list" className="nav-link">
