@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const bcrypt = require("bcrypt");
 const schemas = require("../models/schemas");
 
 router.get("/game/:name", async (req, res) => {
@@ -85,7 +86,8 @@ router.get("/games", async (req, res) => {
 router.post("/users", async (req, res) => {
   try {
     const { username, password } = req.body;
-    const newUser = new schemas.User({ username, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new schemas.User({ username, password: hashedPassword });
     await newUser.save();
     res.send("Registered");
   } catch (error) {
@@ -101,11 +103,10 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "Invalid credentials" });
     }
-    const isPasswordValid = password !== "" && password === user.password;
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-
     res.status(200).json({ message: "Login successful", user: user.username });
   } catch (error) {
     console.error(error);
