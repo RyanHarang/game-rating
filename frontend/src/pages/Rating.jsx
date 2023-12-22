@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
-import "../css/Forms.css";
 import axios from "axios";
 
 export default function Rating() {
@@ -95,6 +94,7 @@ export default function Rating() {
               onChange={handleGameChange}
               onInput={handleSearch}
               className="field"
+              autoComplete="off"
               placeholder="Search for a game"
             />
             {filteredOptions.length > 0 && (

@@ -25,7 +25,7 @@ export default function Header() {
         {!isGuest && (
           <li>
             <Link to="/rating" className="nav-link">
-              Rating
+              Rate Games
             </Link>
           </li>
         )}

@@ -1,6 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./css/App.css";
+import "./css/GameCard.css";
+import "./css/GameDetails.css";
+import "./css/Forms.css";
 import GameList from "./pages/GameList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";

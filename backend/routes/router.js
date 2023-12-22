@@ -75,7 +75,10 @@ router.post("/games", upload.single("image"), async (req, res) => {
 
 router.get("/games", async (req, res) => {
   try {
-    const games = await schemas.Game.find();
+    const searchQuery = req.query.search || "";
+    const games = await schemas.Game.find({
+      title: { $regex: new RegExp(searchQuery, "i") },
+    });
     res.json(games);
   } catch (error) {
     console.error("Error fetching games:", error);
