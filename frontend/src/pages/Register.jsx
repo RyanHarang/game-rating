@@ -26,7 +26,7 @@ export default function Register() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/users",
+        "https://game-rating-server.vercel.app/users", // http://localhost:4000/users
         postData
       );
       setMessage(<p className="success">{response.data}</p>);

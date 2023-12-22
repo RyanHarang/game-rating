@@ -10,25 +10,24 @@ export default function GameDetails() {
   useEffect(() => {
     const fetchGameData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/game/${name}`);
+        const response = await axios.get(
+          `https://game-rating-server.vercel.app/game/${name}`
+        ); //http://localhost:4000/game/${name}
         setGameData(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching game details:", error);
       }
     };
-
     fetchGameData();
   }, [name]);
 
   const calculateAverageRating = () => {
     const { ratings } = gameData;
     if (ratings.length === 0) return 0;
-
     const totalScore = ratings.reduce((sum, rating) => sum + rating.score, 0);
     return totalScore / ratings.length;
   };
-
   if (loading) {
     return <p className="loading">Loading...</p>;
   }

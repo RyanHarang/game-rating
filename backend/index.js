@@ -22,7 +22,7 @@ app.use("/images", express.static("images"));
 app.use("/", router);
 
 mongoose
-  .connect(process.env.DB_URI) //mongodb+srv://harangr:harangr@game-rating.kv0ibsb.mongodb.net/Rating-Site?retryWrites=true&w=majority
+  .connect(process.env.DB_URI)
   .then(() => console.log("DB Connected!"))
   .catch((err) => console.log(err));
 
