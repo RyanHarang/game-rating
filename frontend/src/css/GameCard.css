@@ -2,7 +2,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
 }
 
 .card-container {
@@ -49,4 +48,19 @@
     margin-top: auto;
     object-fit: cover;
     border-radius: 3px;
+}
+
+@media only screen and (max-width: 767px) {
+    .card-container {
+        margin: 4px;
+        width: 30%;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .game-image {
+        height: 125px;
+    }
 }

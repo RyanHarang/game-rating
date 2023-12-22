@@ -85,3 +85,9 @@ input[type="range"] {
     border-radius: 2px;
     background-color: #bbb;
 }
+
+@media only screen and (max-width: 767px) {
+    .form-container {
+        max-width: 350px;
+    }
+}

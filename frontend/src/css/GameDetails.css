@@ -34,3 +34,24 @@
 .rating-list li {
     margin: 5px 0;
 }
+
+@media only screen and (max-width: 767px) {
+    .back-link {
+        font-size: 35px;
+        top: 60px;
+        left: 20px;
+    }
+
+    .details-title {
+        font-size: 28px;
+    }
+
+    .details-image {
+        width: 60vw;
+        height: 20vh;
+    }
+
+    .rating-list li {
+        font-size: 18px;
+    }
+}

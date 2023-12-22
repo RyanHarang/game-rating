@@ -80,7 +80,7 @@ export default function Rating() {
   return (
     <>
       <div className="form-container">
-        <h1 className="form-title">Rating</h1>
+        <h1 className="form-title">Rate Game</h1>
         {isGuest || !isAuthenticated ? (
           <p>You cannot submit ratings as a guest.</p>
         ) : (

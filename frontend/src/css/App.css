@@ -65,3 +65,37 @@ body {
 .success {
   color: #5dd68b;
 }
+
+@media only screen and (max-width: 767px) {
+  .nav-bar {
+    padding: 0;
+  }
+
+  /* .nav-bar ul {
+    flex-wrap: wrap;
+  }
+
+  .nav-bar ul li {
+    padding-left: 1rem;
+    white-space: nowrap; 
+}*/
+
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .logo {
+    height: 2rem;
+  }
+
+  .user {
+    margin: auto auto auto 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+  }
+
+  .loading {
+    font-size: 24px;
+  }
+}
