@@ -1,9 +1,6 @@
 # env
 .env
 
-#images
-backend/images
-
 # Logs
 logs
 *.log

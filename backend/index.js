@@ -9,7 +9,7 @@ require("dotenv/config");
 const app = express();
 
 const corsOptions = {
-  origin: "*",
+  origin: "*", // https://.vercel.app
   credentials: true,
   optionsSuccessStatus: 200,
 };
@@ -22,7 +22,7 @@ app.use("/images", express.static("images"));
 app.use("/", router);
 
 mongoose
-  .connect(process.env.DB_URI)
+  .connect(process.env.DB_URI) //mongodb+srv://harangr:harangr@game-rating.kv0ibsb.mongodb.net/Rating-Site?retryWrites=true&w=majority
   .then(() => console.log("DB Connected!"))
   .catch((err) => console.log(err));
 
