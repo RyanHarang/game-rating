@@ -115,9 +115,9 @@ body {
     flex-direction: column;
     width: 100%;
     position: absolute;
-    top: 90px;
+    top: 35px;
     right: 0;
-    background: rgba(55, 55, 55, 0.9);
+    background: rgba(55, 55, 55, 0.8);
   }
 
   .menu-toggle:checked+.menu-icon+.menu {
