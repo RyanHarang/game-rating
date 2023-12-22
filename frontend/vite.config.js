@@ -16,4 +16,7 @@ export default {
       external: ["react-router-dom"],
     },
   },
+  optimizeDeps: {
+    include: ["react-router-dom"],
+  },
 };
