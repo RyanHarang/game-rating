@@ -29,13 +29,26 @@ body {
   color: #ddd;
 }
 
-.logo {
+.left-section {
   margin: auto 0;
+}
+
+.logo {
   height: 3rem;
 }
 
 .user {
   margin: auto auto auto 20px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  display: none;
 }
 
 .footer {
@@ -68,17 +81,20 @@ body {
 
 @media only screen and (max-width: 767px) {
   .nav-bar {
-    padding: 0;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
   }
 
-  /* .nav-bar ul {
+  .nav-bar ul {
+    display: none;
     flex-wrap: wrap;
   }
 
   .nav-bar ul li {
     padding-left: 1rem;
-    white-space: nowrap; 
-}*/
+    white-space: nowrap;
+  }
 
   .nav-link {
     font-size: 1rem;
@@ -93,6 +109,27 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 14px;
+  }
+
+  .menu {
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 90px;
+    right: 0;
+    background: rgba(55, 55, 55, 0.9);
+  }
+
+  .menu-toggle:checked+.menu-icon+.menu {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .menu li {
+    padding: 5px;
   }
 
   .loading {
