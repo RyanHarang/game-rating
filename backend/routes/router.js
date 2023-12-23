@@ -63,7 +63,7 @@ router.post("/games", upload.single("image"), async (req, res) => {
     const newGame = new schemas.Game({
       title,
       site,
-      imageUrl: `http://localhost:4000/images/${req.file.filename}`,
+      imageUrl: `https://game-rating-server.vercel.app/images/${req.file.filename}`, // http://localhost:4000/images/${req.file.filename}
     });
     await newGame.save();
     res.send("Game added");
