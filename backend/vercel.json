@@ -12,5 +12,6 @@
   "routes": [
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/frontend/index.html" }
-  ]
+  ],
+  "rewrites": [{ "src": "/(.*)", "dest": "/" }]
 }
