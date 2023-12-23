@@ -17,7 +17,7 @@ export default function Login() {
     };
     try {
       const response = await axios.post(
-        "https://game-rating-server.vercel.app/login", // http://localhost:4000/login
+        "http://localhost:4000/login", // https://game-rating-server.vercel.app/login
         postData
       );
 

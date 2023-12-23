@@ -21,7 +21,7 @@ export default function AddGame() {
 
     try {
       const response = await axios.post(
-        "https://game-rating-server.vercel.app/games", // https://localhost:4000/games
+        "https://localhost:4000/games", // https://game-rating-server.vercel.app/games
         formData,
         {
           headers: {

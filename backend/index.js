@@ -9,7 +9,7 @@ require("dotenv/config");
 const app = express();
 
 const corsOptions = {
-  origin: "*", // *
+  origin: "*", // https://game-rating-frontend.vercel.app
   credentials: true,
   // optionsSuccessStatus: 200,
 };

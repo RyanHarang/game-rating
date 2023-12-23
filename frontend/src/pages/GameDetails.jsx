@@ -10,9 +10,7 @@ export default function GameDetails() {
   useEffect(() => {
     const fetchGameData = async () => {
       try {
-        const response = await axios.get(
-          `https://game-rating-server.vercel.app/game/${name}`
-        ); //http://localhost:4000/game/${name}
+        const response = await axios.get(`http://localhost:4000/game/${name}`); // https://game-rating-server.vercel.app/game/${name}
         setGameData(response.data);
         setLoading(false);
       } catch (error) {

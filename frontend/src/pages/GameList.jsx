@@ -11,8 +11,8 @@ export default function GameList() {
     const fetchGames = async () => {
       try {
         const response = await axios.get(
-          `https://game-rating-server.vercel.app/games?search=${searchTerm}`
-        ); // http://localhost:4000/games?search=${searchTerm}
+          `http://localhost:4000/games?search=${searchTerm}`
+        ); // https://game-rating-server.vercel.app/games?search=${searchTerm}
         setGames(response.data);
         setLoading(false);
       } catch (error) {
