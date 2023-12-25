@@ -16,7 +16,10 @@ export default function Login() {
       password: password,
     };
     try {
-      const response = await axios.post("http://localhost:4000/login");
+      const response = await axios.post(
+        "http://localhost:4000/login",
+        postData
+      );
 
       if (response.data.message) {
         login(response.data.user);
