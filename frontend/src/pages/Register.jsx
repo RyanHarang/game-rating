@@ -25,10 +25,7 @@ export default function Register() {
       password,
     };
     try {
-      const response = await axios.post(
-        "http://localhost:4000/users", // https://game-rating-server.vercel.app/users
-        postData
-      );
+      const response = await axios.post("http://localhost:4000/users");
       setMessage(<p className="success">{response.data}</p>);
     } catch (error) {
       console.error("Error registering user:", error);

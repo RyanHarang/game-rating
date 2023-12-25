@@ -14,7 +14,7 @@ export default function Rating() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/games"); // https://game-rating-server.vercel.app/games
+        const response = await axios.get("http://localhost:4000/games");
         const games = response.data.map((game) => game.title);
         setGameOptions(games);
         setFilteredOptions(games);
@@ -51,7 +51,7 @@ export default function Rating() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/rating", // https://game-rating-server.vercel.app/rating
+        "http://localhost:4000/rating",
         postData
       );
       setMessage(<p className="success">{response.data}</p>);

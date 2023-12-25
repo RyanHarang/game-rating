@@ -16,10 +16,7 @@ export default function Login() {
       password: password,
     };
     try {
-      const response = await axios.post(
-        "http://localhost:4000/login", // https://game-rating-server.vercel.app/login
-        postData
-      );
+      const response = await axios.post("http://localhost:4000/login");
 
       if (response.data.message) {
         login(response.data.user);

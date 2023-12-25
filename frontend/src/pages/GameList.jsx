@@ -12,7 +12,7 @@ export default function GameList() {
       try {
         const response = await axios.get(
           `http://localhost:4000/games?search=${searchTerm}`
-        ); // https://game-rating-server.vercel.app/games?search=${searchTerm}
+        );
         setGames(response.data);
         setLoading(false);
       } catch (error) {
