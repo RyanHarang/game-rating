@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const bcrypt = require("bcrypt");
 const schemas = require("../models/schemas");
+require("dotenv/config");
 
 router.get("/game/:name", async (req, res) => {
   const name = req.params.name;
@@ -40,36 +40,47 @@ router.post("/rating", async (req, res) => {
   }
 });
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, "../images");
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir);
-    }
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const fileName = `${Date.now()}-${file.originalname}`;
-    cb(null, fileName);
-  },
+const upload = multer({
+  storage: multer.memoryStorage(),
 });
 
-const upload = multer({ storage: storage });
+const bucketName = process.env.BUCKET_NAME;
+const bucketRegion = process.env.BUCKET_REGION;
+const accessKey = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
 
-router.post("/games", upload.single("image"), async (req, res) => {
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: accessKey,
+    secretAccessKey: secretAccessKey,
+  },
+  region: bucketRegion,
+});
+
+router.post("/upload-s3", upload.single("image"), async (req, res) => {
   try {
-    const { title, site, imageUrl } = req.body;
-    const imagePath = req.file ? req.file.path : null;
+    const { title, site } = req.body;
+    const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
+    const uniqueKey = `${timestamp}_${req.file.originalname}`;
+    const params = {
+      Bucket: bucketName,
+      Key: uniqueKey,
+      Body: req.file.buffer,
+      ContentType: req.file.mimetype,
+    };
+    const command = new PutObjectCommand(params);
+    await s3.send(command);
+    const s3Url = `https://${bucketName}.s3.amazonaws.com/${uniqueKey}`;
     const newGame = new schemas.Game({
       title,
       site,
-      imageUrl: `http://localhost:4000/images/${req.file.filename}`, // https://game-rating-server.vercel.app/images/${req.file.filename}
+      imageUrl: s3Url,
     });
     await newGame.save();
     res.send("Game added");
   } catch (error) {
-    console.error("Error adding game:", error);
-    res.status(500).send("Failed to add game");
+    console.error("Error adding game and uploading image to S3:", error);
+    res.status(500).send("Failed to add game and upload image to S3");
   }
 });
 

@@ -14,14 +14,14 @@ export default function AddGame() {
   };
 
   const axiosPostData = async () => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("site", site);
-    formData.append("image", image);
-
     try {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("site", site);
+      formData.append("image", image);
+
       const response = await axios.post(
-        "https://localhost:4000/games", // https://game-rating-server.vercel.app/games
+        "http://localhost:4000/upload-s3",
         formData,
         {
           headers: {
@@ -29,6 +29,7 @@ export default function AddGame() {
           },
         }
       );
+
       setTitle("");
       setSite("");
       setImage(null);
