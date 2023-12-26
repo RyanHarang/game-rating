@@ -79,8 +79,8 @@ router.post("/upload-s3", upload.single("image"), async (req, res) => {
     await newGame.save();
     res.send("Game added");
   } catch (error) {
-    console.error("Error adding game and uploading image to S3:", error);
-    res.status(500).send("Failed to add game and upload image to S3");
+    console.error("Error adding game:", error);
+    res.status(500).send("Failed to add game");
   }
 });
 
@@ -94,10 +94,6 @@ router.get("/games", async (req, res) => {
     const games = await schemas.Game.find({
       title: { $regex: new RegExp(escapedSearchQuery, "i") },
     });
-    // const searchQuery = req.query.search || "";
-    // const games = await schemas.Game.find({
-    //   title: { $regex: new RegExp(searchQuery, "i") },
-    // });
     res.json(games);
   } catch (error) {
     console.error("Error fetching games:", error);
@@ -108,6 +104,10 @@ router.get("/games", async (req, res) => {
 router.post("/users", async (req, res) => {
   try {
     const { username, password } = req.body;
+    const existingUser = await schemas.User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).send("Username already exists");
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new schemas.User({ username, password: hashedPassword });
     await newUser.save();

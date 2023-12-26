@@ -25,13 +25,18 @@ export default function Register() {
       password,
     };
     try {
-      const response = await axios.post("http://localhost:4000/users");
+      const response = await axios.post(
+        "http://localhost:4000/users",
+        postData
+      );
       setMessage(<p className="success">{response.data}</p>);
     } catch (error) {
-      console.error("Error registering user:", error);
-      setMessage(
-        <p className="error">Failed to register. Please try again.</p>
-      );
+      if (error.response && error.response.status === 400) {
+        setMessage(<p className="error">Username already exists</p>);
+      } else {
+        console.error("Error registering user:", error);
+        setMessage(<p className="error">Failed to register</p>);
+      }
     }
   };
 
@@ -41,13 +46,10 @@ export default function Register() {
       setMessage(<p className="error">Passwords do not match</p>);
       return;
     }
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!?_\-*]+$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+[\]{}|;:'",.<>?/]).{8,}$/;
     if (!passwordRegex.test(password)) {
-      setMessage(
-        <p className="error">
-          Password must be at least 5 characters and contain letters and numbers
-        </p>
-      );
+      setMessage(<p className="error">Password does not meet requirements</p>);
       return;
     }
     setMessage("");
@@ -89,6 +91,10 @@ export default function Register() {
           className="field"
           required
         />
+        <p className="message">
+          Passwords must be at least 8 characters long and contain at least 1
+          uppercase letter, 1 lowercase letter, 1 digit, and 1 special character
+        </p>
         <button type="submit" className="process">
           Submit
         </button>
