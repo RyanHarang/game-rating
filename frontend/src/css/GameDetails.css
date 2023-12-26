@@ -13,13 +13,8 @@
     color: #ddd;
 }
 
-.site {
-    text-decoration: none;
-    color: #bbb;
-}
-
 .details-title {
-    width: 50%;
+    width: 60%;
     margin: 5px auto;
     font-size: 2.5vw;
     transition: transform 0.5s ease;
@@ -28,6 +23,11 @@
 .details-title:hover {
     transform: scale(1.1);
     color: #ddd;
+}
+
+.site {
+    text-decoration: none;
+    color: #bbb;
 }
 
 .details-image {
