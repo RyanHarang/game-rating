@@ -87,9 +87,17 @@ router.post("/upload-s3", upload.single("image"), async (req, res) => {
 router.get("/games", async (req, res) => {
   try {
     const searchQuery = req.query.search || "";
+    const escapedSearchQuery = searchQuery.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
+    );
     const games = await schemas.Game.find({
-      title: { $regex: new RegExp(searchQuery, "i") },
+      title: { $regex: new RegExp(escapedSearchQuery, "i") },
     });
+    // const searchQuery = req.query.search || "";
+    // const games = await schemas.Game.find({
+    //   title: { $regex: new RegExp(searchQuery, "i") },
+    // });
     res.json(games);
   } catch (error) {
     console.error("Error fetching games:", error);
