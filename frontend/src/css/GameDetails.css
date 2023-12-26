@@ -37,11 +37,16 @@
 .details-image {
     display: block;
     margin: 0 auto;
-    width: 300px;
-    height: 200px;
+    width: 20%;
+    height: 225px;
     object-fit: cover;
     object-position: top;
     border-radius: 3px;
+}
+
+.details-form {
+    margin: 10px auto;
+    width: 20%;
 }
 
 .rating-list {
@@ -51,7 +56,7 @@
 }
 
 .rating-list li {
-    margin: 5px 0;
+    margin: 0 auto;
 }
 
 @media only screen and (max-width: 767px) {
@@ -68,6 +73,10 @@
     .details-image {
         width: 60vw;
         height: 20vh;
+    }
+
+    .details-form {
+        width: 60vw;
     }
 
     .rating-list li {
