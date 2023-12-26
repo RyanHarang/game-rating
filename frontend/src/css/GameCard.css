@@ -28,16 +28,6 @@
     white-space: nowrap;
 }
 
-.site {
-    text-decoration: none;
-    color: #bbb;
-}
-
-.site:hover {
-    transform: scale(1.01);
-    color: #ddd;
-}
-
 .game-link {
     line-height: 0;
 }

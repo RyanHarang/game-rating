@@ -38,7 +38,9 @@ export default function GameDetails() {
         </Link>
         {gameData ? (
           <>
-            <h1 className="details-title">{name}</h1>
+            <a className="site" href={gameData.game.site} target="_blank">
+              <h1 className="details-title">{name}</h1>
+            </a>
             <img
               src={gameData.game.imageUrl}
               alt={gameData.game.title}
