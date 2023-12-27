@@ -30,15 +30,12 @@ export default function GameDetails() {
       score: score,
     };
     try {
-      // const response =
       await axios.post("http://localhost:4000/rating", postData);
       const response = await axios.get(`http://localhost:4000/game/${name}`);
       setGameData(response.data);
-      // setMessage(<p className="success">{response.data}</p>);
       setScore(5);
     } catch (error) {
       console.error("Error posting rating:", error);
-      // setMessage(<p className="error">Failed to submit rating</p>);
     }
   };
 
@@ -46,7 +43,7 @@ export default function GameDetails() {
     const userRating = gameData.ratings.find(
       (rating) => rating.username === user
     );
-    return userRating ? userRating.score : null;
+    return userRating !== undefined ? userRating.score : null;
   };
 
   const calculateAverageRating = () => {
@@ -62,12 +59,7 @@ export default function GameDetails() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!score) {
-      // setMessage(<p className="required">Please fill all fields.</p>);
-    } else {
-      // setMessage("");
-      axiosPostData();
-    }
+    axiosPostData();
   };
 
   if (loading) {
@@ -114,18 +106,22 @@ export default function GameDetails() {
                 </button>
               </form>
             )}
-            <h3>Your Rating: {getUserRating() || "None"}</h3>
+            <h3>
+              Your Rating: {getUserRating() !== null ? getUserRating() : "None"}
+            </h3>
             {gameData.ratings.length > 0 && (
               <h3>Average: {calculateAverageRating().toFixed(2)}</h3>
             )}
             <h3>All Ratings:</h3>
-            <ul className="rating-list">
-              {gameData.ratings.map((rating) => (
-                <li key={rating._id}>
-                  {rating.username}: {rating.score}
-                </li>
-              ))}
-            </ul>
+            <div className="rating-container">
+              <ul className="rating-list">
+                {gameData.ratings.map((rating) => (
+                  <li key={rating._id}>
+                    {rating.username}: {rating.score}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </>
         ) : (
           "No Game Data Found"

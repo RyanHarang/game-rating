@@ -49,6 +49,14 @@
     width: 20%;
 }
 
+.ratings-container {
+    max-height: 300px;
+    /* Set a maximum height for the container */
+    overflow-y: auto;
+    /* Enable vertical scrolling when content exceeds the height */
+    margin-top: 10px;
+}
+
 .rating-list {
     list-style: none;
     text-align: center;

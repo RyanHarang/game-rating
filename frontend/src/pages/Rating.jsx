@@ -65,7 +65,7 @@ export default function Rating() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!game || !score) {
+    if (!game) {
       setMessage(<p className="required">Please fill all fields.</p>);
     } else {
       setMessage("");

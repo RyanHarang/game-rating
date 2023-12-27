@@ -30,6 +30,9 @@ export default function Register() {
         postData
       );
       setMessage(<p className="success">{response.data}</p>);
+      setUsername("");
+      setPassword("");
+      setConfirmPassword("");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setMessage(<p className="error">Username already exists</p>);
