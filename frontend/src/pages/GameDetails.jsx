@@ -106,12 +106,12 @@ export default function GameDetails() {
                 </button>
               </form>
             )}
-            <h3>
-              Your Rating: {getUserRating() !== null ? getUserRating() : "None"}
-            </h3>
             {gameData.ratings.length > 0 && (
               <h3>Average: {calculateAverageRating().toFixed(2)}</h3>
             )}
+            <h3>
+              Your Rating: {getUserRating() !== null ? getUserRating() : "None"}
+            </h3>
             <h3>All Ratings:</h3>
             <div className="rating-container">
               <ul className="rating-list">
