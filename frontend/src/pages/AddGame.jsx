@@ -3,7 +3,7 @@ import { useAuth } from "../components/AuthContext";
 import axios from "axios";
 
 export default function AddGame() {
-  const { isGuest, isAuthenticated } = useAuth();
+  const { isGuest } = useAuth();
   const [title, setTitle] = useState("");
   const [site, setSite] = useState("");
   const [image, setImage] = useState(null);
@@ -53,7 +53,7 @@ export default function AddGame() {
     <>
       <div className="form-container">
         <h1 className="form-title">Add Game</h1>
-        {isGuest || !isAuthenticated ? (
+        {isGuest ? (
           <p>You can not add games as a guest.</p>
         ) : (
           <form className="game-form" onSubmit={handleSubmit}>

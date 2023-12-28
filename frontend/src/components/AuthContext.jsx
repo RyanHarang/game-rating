@@ -4,34 +4,23 @@ import React from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = React.memo(({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [isGuest, setIsGuest] = useState(true);
 
   const login = (userData) => {
     setUser(userData);
-    setIsAuthenticated(true);
     setIsGuest(false);
-  };
-
-  const loginAsGuest = () => {
-    setUser("Guest");
-    setIsAuthenticated(true);
-    setIsGuest(true);
   };
 
   const logout = () => {
     setUser(null);
-    setIsAuthenticated(false);
     setIsGuest(true);
   };
 
   const contextValue = {
-    isAuthenticated,
     user,
     isGuest,
     login,
-    loginAsGuest,
     logout,
   };
 

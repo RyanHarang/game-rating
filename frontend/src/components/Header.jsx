@@ -4,7 +4,7 @@ import { useAuth } from "../components/AuthContext";
 import Logo from "../images/logo.png";
 
 export default function Header() {
-  const { logout, isGuest, user } = useAuth();
+  const { isGuest, user } = useAuth();
 
   return (
     <>
@@ -47,8 +47,8 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/" className="nav-link" onClick={() => logout()}>
-              Login
+            <Link to="/" className="nav-link">
+              {isGuest ? "Login" : "Logout"}
             </Link>
           </li>
         </ul>

@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function GameDetails() {
   const { name } = useParams();
-  const { isGuest, user, isAuthenticated } = useAuth();
+  const { isGuest, user } = useAuth();
   const [score, setScore] = useState(5);
   const [loading, setLoading] = useState(true);
   const [gameData, setGameData] = useState(null);

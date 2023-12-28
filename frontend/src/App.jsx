@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Rating from "./pages/Rating";
 import AddGame from "./pages/AddGame";
 import GameDetails from "./pages/GameDetails";
+import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 
@@ -17,7 +18,8 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <Navigation />
+        <Header />
+        {/* <Navigation /> */}
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/list" element={<GameList />} />

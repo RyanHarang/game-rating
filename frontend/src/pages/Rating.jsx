@@ -3,7 +3,7 @@ import { useAuth } from "../components/AuthContext";
 import axios from "axios";
 
 export default function Rating() {
-  const { isGuest, user, isAuthenticated } = useAuth();
+  const { isGuest, user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [gameOptions, setGameOptions] = useState([]);
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -81,7 +81,7 @@ export default function Rating() {
     <>
       <div className="form-container">
         <h1 className="form-title">Rate Game</h1>
-        {isGuest || !isAuthenticated ? (
+        {isGuest ? (
           <p>You cannot submit ratings as a guest.</p>
         ) : (
           <form className="rating-form" onSubmit={handleSubmit}>

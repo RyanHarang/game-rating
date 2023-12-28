@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login, loginAsGuest } = useAuth();
+  const { login, logout } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -45,14 +45,6 @@ export default function Login() {
     }
   };
 
-  const handleGuest = () => {
-    setMessage(<p className="message">Continuing as Guest</p>);
-    loginAsGuest();
-    setTimeout(() => {
-      navigate("/list");
-    }, 1000);
-  };
-
   return (
     <>
       <div className="form-container">
@@ -83,9 +75,9 @@ export default function Login() {
           <button
             type="button"
             className="process guest-login"
-            onClick={handleGuest}
+            onClick={logout}
           >
-            Continue as Guest
+            Logout
           </button>
         </form>
         {message}
