@@ -91,6 +91,27 @@ input[type="range"] {
     background-color: #bbb;
 }
 
+/* Admin */
+.dropdown {
+    width: 120px;
+}
+
+.delete {
+    background-color: #ff0048;
+    width: 120px;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.delete:hover {
+    color: #eee;
+    background-color: #d91f54;
+}
+
 @media only screen and (max-width: 767px) {
     .form-container {
         max-width: 350px;

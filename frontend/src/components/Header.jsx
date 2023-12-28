@@ -51,6 +51,13 @@ export default function Header() {
               {isGuest ? "Login" : "Logout"}
             </Link>
           </li>
+          {user === "Ryan H" && (
+            <li>
+              <Link to="/admin" className="nav-link">
+                Admin
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </>

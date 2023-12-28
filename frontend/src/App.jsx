@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Rating from "./pages/Rating";
 import AddGame from "./pages/AddGame";
 import GameDetails from "./pages/GameDetails";
+import Admin from "./pages/Admin";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/add" element={<AddGame />} />
           <Route path="/register" element={<Register />} />
           <Route path="/game/:name" element={<GameDetails />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         <Footer />
       </BrowserRouter>

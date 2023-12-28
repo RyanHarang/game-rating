@@ -21,6 +21,18 @@ router.get("/game/:name", async (req, res) => {
   }
 });
 
+router.delete("/games/:title", async (req, res) => {
+  const title = req.params.title;
+  try {
+    await schemas.Game.deleteOne({ title });
+    await schemas.Rating.deleteMany({ game: title });
+    res.send("Game and associated ratings deleted successfully");
+  } catch (error) {
+    console.error("Error deleting game and associated ratings:", error);
+    res.status(500).send("Failed to delete game and associated ratings");
+  }
+});
+
 router.post("/rating", async (req, res) => {
   try {
     const { username, game, score } = req.body;
@@ -101,6 +113,16 @@ router.get("/games", async (req, res) => {
   }
 });
 
+router.get("/allUsers", async (req, res) => {
+  try {
+    const users = await schemas.User.find();
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching all users:", error);
+    res.status(500).send("Failed to fetch all users");
+  }
+});
+
 router.post("/users", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -115,6 +137,18 @@ router.post("/users", async (req, res) => {
   } catch (error) {
     console.error("Error saving user:", error);
     res.status(500).send("Failed to register");
+  }
+});
+
+router.delete("/users/:username", async (req, res) => {
+  const username = req.params.username;
+  try {
+    await schemas.User.deleteOne({ username });
+    await schemas.Rating.deleteMany({ username });
+    res.send("User and associated ratings deleted successfully");
+  } catch (error) {
+    console.error("Error deleting user and associated ratings:", error);
+    res.status(500).send("Failed to delete user and associated ratings");
   }
 });
 
