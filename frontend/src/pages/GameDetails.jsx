@@ -84,7 +84,7 @@ export default function GameDetails() {
               alt={gameData.game.title}
               className="details-image"
             />
-            {isGuest || !isAuthenticated ? (
+            {isGuest ? (
               <p>Sign in to rate games</p>
             ) : (
               <form
