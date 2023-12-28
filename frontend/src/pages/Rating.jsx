@@ -116,7 +116,6 @@ export default function Rating() {
               </select>
             )}
             <label>Score</label>
-            {/* <span className="score-display">{score}</span> */}
             <input
               type="number"
               min="0"
