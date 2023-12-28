@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const sharp = require("sharp");
 const bcrypt = require("bcrypt");
 const schemas = require("../models/schemas");
 require("dotenv/config");
@@ -73,16 +74,22 @@ router.post("/upload-s3", upload.single("image"), async (req, res) => {
   try {
     const { title, site } = req.body;
     const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
-    const uniqueKey = `${timestamp}_${req.file.originalname}`;
+    const webpData = await sharp(req.file.buffer)
+      .webp({ quality: 80 })
+      .toBuffer();
+    const webpKey = `${timestamp}_${req.file.originalname.replace(
+      /\.[^/.]+$/,
+      ""
+    )}.webp`;
     const params = {
       Bucket: bucketName,
-      Key: uniqueKey,
-      Body: req.file.buffer,
-      ContentType: req.file.mimetype,
+      Key: webpKey,
+      Body: webpData,
+      ContentType: "image/webp",
     };
     const command = new PutObjectCommand(params);
     await s3.send(command);
-    const s3Url = `https://${bucketName}.s3.amazonaws.com/${uniqueKey}`;
+    const s3Url = `https://${bucketName}.s3.amazonaws.com/${webpKey}`;
     const newGame = new schemas.Game({
       title,
       site,
