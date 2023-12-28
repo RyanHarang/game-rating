@@ -91,7 +91,6 @@ export default function GameDetails() {
                 className="rating-form details-form"
                 onSubmit={handleSubmit}
               >
-                {/* <span className="score-display">{score}</span> */}
                 <input
                   type="number"
                   min="0"
