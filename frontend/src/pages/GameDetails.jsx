@@ -91,7 +91,16 @@ export default function GameDetails() {
                 className="rating-form details-form"
                 onSubmit={handleSubmit}
               >
-                <span className="score-display">{score}</span>
+                {/* <span className="score-display">{score}</span> */}
+                <input
+                  type="number"
+                  min="0"
+                  max="10"
+                  step="0.5"
+                  value={score}
+                  onChange={handleScoreChange}
+                  className="score-input"
+                />
                 <input
                   type="range"
                   min="0"

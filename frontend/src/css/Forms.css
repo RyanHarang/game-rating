@@ -64,7 +64,12 @@ label {
     border-radius: 4px;
 }
 
-/* Score Slider Styling */
+/* Score Input & Slider Styling */
+.score-input {
+    padding: 8px;
+    text-align: center;
+}
+
 .score-slider {
     margin: 12px 0;
 }
