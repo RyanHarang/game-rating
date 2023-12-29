@@ -13,7 +13,7 @@ export default function Header() {
           <img className="logo" src={Logo} alt="dice-logo" />
         </div>
         {isGuest ? (
-          <p className="user">Guest</p>
+          <p className="guest">Guest</p>
         ) : (
           <p className="user">{user}</p>
         )}

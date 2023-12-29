@@ -38,6 +38,14 @@ body {
 }
 
 .user {
+  font-size: 20px;
+  color: #f0f0f0;
+  margin: auto auto auto 20px;
+}
+
+.guest {
+  font-size: 20px;
+  color: #bbb;
   margin: auto auto auto 20px;
 }
 
