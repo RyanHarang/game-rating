@@ -35,7 +35,11 @@ export default function AddGame() {
       setImage(null);
       setMessage(<p className="success">{response.data}</p>);
     } catch (error) {
-      setMessage(<p className="error">Failed to add game</p>);
+      if (error.response && error.response.status === 400) {
+        setMessage(<p className="error">{error.response.data}</p>);
+      } else {
+        setMessage(<p className="error">Failed to add game</p>);
+      }
     }
   };
 
