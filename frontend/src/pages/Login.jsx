@@ -16,11 +16,11 @@ export default function Login() {
       password: password,
     };
     try {
+      setMessage(<p className="loading">Logging in...</p>);
       const response = await axios.post(
         "http://localhost:4000/users/login",
         postData
       );
-      setMessage(<p className="loading">Logging in...</p>);
       if (response.data.message) {
         login(response.data.user);
         setMessage(<p className="success">{response.data.message}</p>);
