@@ -6,7 +6,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   entryDate: { type: Date, default: Date.now },
 });
-userSchema.index({ username: 1 }, { unique: true });
+userSchema.index({ username: 1 });
 
 const ratingSchema = new Schema({
   username: { type: String, required: true },
@@ -21,6 +21,7 @@ const gameSchema = new Schema({
   imageUrl: { type: String, required: true },
   entryDate: { type: Date, default: Date.now },
 });
+gameSchema.index({ title: 1 });
 // name, schema, database
 const User = mongoose.model("User", userSchema, "users");
 const Rating = mongoose.model("Rating", ratingSchema, "ratings");
