@@ -3,18 +3,6 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const schemas = require("../models/schemas");
 
-router.delete("/:username", async (req, res) => {
-  const username = req.params.username;
-  try {
-    await schemas.User.deleteOne({ username });
-    await schemas.Rating.deleteMany({ username });
-    res.send("User and associated ratings deleted successfully");
-  } catch (error) {
-    console.error("Error deleting user and associated ratings:", error);
-    res.status(500).send("Failed to delete user and associated ratings");
-  }
-});
-
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -30,6 +18,18 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.delete("/:username", async (req, res) => {
+  const username = req.params.username;
+  try {
+    await schemas.User.deleteOne({ username });
+    await schemas.Rating.deleteMany({ username });
+    res.send("User and associated ratings deleted successfully");
+  } catch (error) {
+    console.error("Error deleting user and associated ratings:", error);
+    res.status(500).send("Failed to delete user and associated ratings");
   }
 });
 
