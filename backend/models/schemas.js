@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   entryDate: { type: Date, default: Date.now },
 });
+userSchema.index({ username: 1 }, { unique: true });
 
 const ratingSchema = new Schema({
   username: { type: String, required: true },
@@ -15,7 +16,7 @@ const ratingSchema = new Schema({
 });
 
 const gameSchema = new Schema({
-  title: { type: String, required: true },
+  title: { type: String, required: true, unique: true },
   site: { type: String, required: true },
   imageUrl: { type: String, required: true },
   entryDate: { type: Date, default: Date.now },
