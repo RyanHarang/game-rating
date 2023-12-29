@@ -26,7 +26,7 @@ export default function Register() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/users",
+        "http://localhost:4000/users/upload-user",
         postData
       );
       setMessage(<p className="success">{response.data}</p>);

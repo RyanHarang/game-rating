@@ -13,7 +13,7 @@ export default function GameDetails() {
   useEffect(() => {
     const fetchGameData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/game/${name}`);
+        const response = await axios.get(`http://localhost:4000/games/${name}`);
         setGameData(response.data);
         setLoading(false);
       } catch (error) {
@@ -30,8 +30,8 @@ export default function GameDetails() {
       score: score,
     };
     try {
-      await axios.post("http://localhost:4000/rating", postData);
-      const response = await axios.get(`http://localhost:4000/game/${name}`);
+      await axios.post("http://localhost:4000/ratings/upload-rating", postData);
+      const response = await axios.get(`http://localhost:4000/games/${name}`);
       setGameData(response.data);
       setScore(5);
     } catch (error) {

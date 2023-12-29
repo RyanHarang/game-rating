@@ -13,7 +13,9 @@ export default function Admin() {
   useEffect(() => {
     const fetchUsersAndGames = async () => {
       try {
-        const usersResponse = await axios.get("http://localhost:4000/allUsers");
+        const usersResponse = await axios.get(
+          "http://localhost:4000/users/all-users"
+        );
         const gamesResponse = await axios.get("http://localhost:4000/games");
         setUsersList(usersResponse.data);
         setGamesList(gamesResponse.data);

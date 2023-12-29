@@ -51,7 +51,7 @@ export default function Rating() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/rating",
+        "http://localhost:4000/ratings/upload-rating",
         postData
       );
       setMessage(<p className="success">{response.data}</p>);

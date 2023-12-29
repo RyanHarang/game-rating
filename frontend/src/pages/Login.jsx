@@ -17,7 +17,7 @@ export default function Login() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/login",
+        "http://localhost:4000/users/login",
         postData
       );
 

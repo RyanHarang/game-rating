@@ -21,7 +21,7 @@ export default function AddGame() {
       formData.append("image", image);
 
       const response = await axios.post(
-        "http://localhost:4000/upload-s3",
+        "http://localhost:4000/games/upload-game",
         formData,
         {
           headers: {
