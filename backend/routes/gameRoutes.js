@@ -25,6 +25,10 @@ const s3 = new S3Client({
 router.post("/upload-game", upload.single("image"), async (req, res) => {
   try {
     const { title, site } = req.body;
+    const existingGame = await schemas.Game.findOne({ title });
+    if (existingGame) {
+      return res.status(400).send("A game with the same title already exists.");
+    }
     const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
     const webpData = await sharp(req.file.buffer)
       .webp({ quality: 80 })
