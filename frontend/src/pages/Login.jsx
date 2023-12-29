@@ -20,13 +20,13 @@ export default function Login() {
         "http://localhost:4000/users/login",
         postData
       );
-
+      setMessage(<p className="loading">Logging in...</p>);
       if (response.data.message) {
         login(response.data.user);
         setMessage(<p className="success">{response.data.message}</p>);
         setTimeout(() => {
           navigate("/list");
-        }, 1000);
+        }, 600);
       } else {
         setMessage(<p className="error">{response.data.error}</p>);
       }
