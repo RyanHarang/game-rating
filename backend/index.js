@@ -19,7 +19,6 @@ app.use(compression());
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static("images"));
 app.use("/", router);
 
 mongoose
