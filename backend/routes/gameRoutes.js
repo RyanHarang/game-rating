@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} = require("@aws-sdk/client-s3");
 const sharp = require("sharp");
 const schemas = require("../models/schemas");
 require("dotenv/config");
@@ -86,13 +90,56 @@ router.get("/:name", async (req, res) => {
 router.delete("/:title", async (req, res) => {
   const title = req.params.title;
   try {
+    const game = await schemas.Game.findOne({ title });
+    if (!game) {
+      return res.status(404).send(`Game with title ${title} not found`);
+    }
+    const s3Url = game.imageUrl;
+    const s3Key = getS3KeyFromUrl(s3Url);
+    await deleteS3Object(s3Key);
     await schemas.Game.deleteOne({ title });
     await schemas.Rating.deleteMany({ game: title });
-    res.send(`${title} and associated ratings deleted successfully`);
+    res.send(
+      `${title} and associated ratings, as well as S3 object, deleted successfully`
+    );
   } catch (error) {
     console.error(`Error deleting ${title} and associated ratings:`, error);
     res.status(500).send(`Failed to delete ${title} and associated ratings`);
   }
 });
+
+function getS3KeyFromUrl(url) {
+  try {
+    const urlObject = new URL(url);
+    return urlObject.pathname.substring(1);
+  } catch (error) {
+    console.error(`Error extracting S3 key from URL ${url}:`, error);
+    throw error;
+  }
+}
+
+async function deleteS3Object(key) {
+  const s3 = new S3Client({
+    credentials: {
+      accessKeyId: process.env.ACCESS_KEY,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    },
+    region: process.env.BUCKET_REGION,
+  });
+
+  const params = {
+    Bucket: process.env.BUCKET_NAME,
+    Key: key,
+  };
+
+  try {
+    const command = new DeleteObjectCommand(params);
+    await s3.send(command);
+    console.log(`S3 object with key ${key} deleted successfully`);
+  } catch (error) {
+    console.error(`Error deleting S3 object with key ${key}:`, error);
+    throw error;
+  }
+}
 
 module.exports = router;
