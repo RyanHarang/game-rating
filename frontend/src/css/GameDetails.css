@@ -1,6 +1,6 @@
 .back-link {
     text-decoration: none;
-    font-size: 40px;
+    font-size: 60px;
     color: #bbb;
     position: absolute;
     top: 75px;
@@ -69,13 +69,16 @@
 
 @media only screen and (max-width: 767px) {
     .back-link {
+        position: fixed;
+        display: block;
         font-size: 35px;
-        top: 60px;
-        left: 20px;
+        top: 50px;
+        left: 10px;
     }
 
     .details-title {
         font-size: 22px;
+        padding: 0 50px;
     }
 
     .details-image {
