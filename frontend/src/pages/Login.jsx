@@ -72,11 +72,7 @@ export default function Login() {
           <button type="submit" className="process">
             Login
           </button>
-          <button
-            type="button"
-            className="process guest-login"
-            onClick={logout}
-          >
+          <button type="button" className="process logout" onClick={logout}>
             Logout
           </button>
         </form>

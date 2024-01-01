@@ -53,8 +53,17 @@ label {
 }
 
 /* Login Form */
-.guest-login {
+.logout {
     margin-top: 10px;
+}
+
+/* Register Form */
+.login-link {
+    color: #bbb;
+}
+
+.login-link:hover {
+    color: #ddd;
 }
 
 /* Rating Form */

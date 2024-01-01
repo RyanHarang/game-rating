@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Register() {
@@ -29,7 +30,15 @@ export default function Register() {
         "http://localhost:4000/users/upload-user",
         postData
       );
-      setMessage(<p className="success">{response.data}</p>);
+      setMessage(
+        <p className="success">
+          {response.data}
+          <br />
+          <Link to="/" className="login-link">
+            Login here
+          </Link>
+        </p>
+      );
       setUsername("");
       setPassword("");
       setConfirmPassword("");
