@@ -58,6 +58,10 @@ export default function Register() {
       setMessage(<p className="error">Passwords do not match</p>);
       return;
     }
+    if (username.length < 4) {
+      setMessage(<p className="error">Username does not meet requirements</p>);
+      return;
+    }
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+[\]{}|;:'",.<>?/]).{8,}$/;
     if (!passwordRegex.test(password)) {
@@ -104,6 +108,7 @@ export default function Register() {
           required
         />
         <p className="message">
+          Usernames must be at least 4 characters long <br />
           Passwords must be at least 8 characters long and contain at least 1
           uppercase letter, 1 lowercase letter, 1 digit, and 1 special character
         </p>
