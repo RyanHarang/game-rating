@@ -58,7 +58,7 @@ export default function Register() {
       setMessage(<p className="error">Passwords do not match</p>);
       return;
     }
-    if (username.length < 4) {
+    if (username.length < 4 || username.length > 12) {
       setMessage(<p className="error">Username does not meet requirements</p>);
       return;
     }
@@ -108,7 +108,7 @@ export default function Register() {
           required
         />
         <p className="message">
-          Usernames must be at least 4 characters long <br />
+          Usernames must be between 4 and 12 characters long <br />
           Passwords must be at least 8 characters long and contain at least 1
           uppercase letter, 1 lowercase letter, 1 digit, and 1 special character
         </p>
