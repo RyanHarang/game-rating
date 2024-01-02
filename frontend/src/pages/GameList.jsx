@@ -17,6 +17,17 @@ export default function GameList() {
   }, [scrollPosition]);
 
   useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: scrollPosition });
+  }, [games]);
+
+  useEffect(() => {
     fetchGames();
   }, [searchTerm]);
 
@@ -41,17 +52,6 @@ export default function GameList() {
       setScrollPosition(window.scrollY);
     });
   };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo({ top: scrollPosition });
-  }, [games]);
 
   if (loading) {
     return <p className="loading">Loading...</p>;
