@@ -15,6 +15,11 @@ export default function GameList() {
   useEffect(() => {
     localStorage.setItem("gameListScrollPosition", scrollPosition.toString());
   }, [scrollPosition]);
+
+  useEffect(() => {
+    fetchGames();
+  }, [searchTerm]);
+
   const fetchGames = async () => {
     try {
       const response = await axios.get(
@@ -26,10 +31,6 @@ export default function GameList() {
       console.error("Error fetching games:", error);
     }
   };
-
-  useEffect(() => {
-    fetchGames();
-  }, [searchTerm]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
