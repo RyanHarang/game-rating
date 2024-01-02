@@ -50,20 +50,19 @@
 }
 
 .ratings-container {
-    max-height: 100px;
-    /* Set a maximum height for the container */
+    max-height: 110px;
+    margin: 0 auto;
+    width: 15%;
     overflow-y: auto;
-    /* Enable vertical scrolling when content exceeds the height */
-    margin-top: 10px;
 }
 
-.rating-list {
+.ratings-list {
     list-style: none;
     text-align: center;
     padding: 0;
 }
 
-.rating-list li {
+.ratings-list li {
     margin: 0 auto;
 }
 
