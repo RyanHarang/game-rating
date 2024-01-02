@@ -121,8 +121,8 @@ export default function GameDetails() {
               Your Rating: {getUserRating() !== null ? getUserRating() : "None"}
             </h3>
             <h3>All Ratings:</h3>
-            <div className="rating-container">
-              <ul className="rating-list">
+            <div className="ratings-container">
+              <ul className="ratings-list">
                 {gameData.ratings.map((rating) => (
                   <li key={rating._id}>
                     {rating.username}: {rating.score}
