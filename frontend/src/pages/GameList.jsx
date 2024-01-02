@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import GameCard from "../components/GameCard";
 import ScrollButton from "../components/ScrollButton";
 import axios from "axios";
