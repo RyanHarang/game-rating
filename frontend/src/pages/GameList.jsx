@@ -6,6 +6,16 @@ export default function GameList() {
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [scrollPosition, setScrollPosition] = useState(() => {
+    const storedScrollPosition = sessionStorage.getItem(
+      "gameListScrollPosition"
+    );
+    return storedScrollPosition ? parseInt(storedScrollPosition, 10) : 0;
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("gameListScrollPosition", scrollPosition);
+  }, [scrollPosition]);
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -15,11 +25,22 @@ export default function GameList() {
         );
         setGames(response.data);
         setLoading(false);
+        const storedScrollPosition = sessionStorage.getItem(
+          "gameListScrollPosition"
+        );
+        window.scrollTo(0, storedScrollPosition || 0);
       } catch (error) {
         console.error("Error fetching games:", error);
       }
     };
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
     fetchGames();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [searchTerm]);
 
   const handleSearchChange = (e) => {
