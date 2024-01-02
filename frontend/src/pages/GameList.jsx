@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GameCard from "../components/GameCard";
+import ScrollButton from "../components/ScrollButton";
 import axios from "axios";
 
 export default function GameList() {
@@ -67,6 +68,7 @@ export default function GameList() {
           <GameCard key={game._id} game={game} />
         ))}
       </div>
+      <ScrollButton />
     </>
   );
 }
