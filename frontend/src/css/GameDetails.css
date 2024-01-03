@@ -50,9 +50,13 @@
 }
 
 .ratings-container {
+    /* border-radius: 50%; */
+    background: radial-gradient(circle at center, #1c1c1c, #242424);
+    /* background: linear-gradient(to bottom, #242424, #1f1f1f, #242424); */
+    /* background-color: #242424; */
     max-height: 110px;
     margin: 0 auto;
-    width: 15%;
+    width: 20vw;
     overflow-y: auto;
 }
 
@@ -89,7 +93,11 @@
         width: 60vw;
     }
 
-    .rating-list li {
+    .ratings-container {
+        width: 60vw;
+    }
+
+    .ratings-list li {
         font-size: 18px;
     }
 }
