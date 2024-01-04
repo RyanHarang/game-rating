@@ -47,9 +47,6 @@ export default function GameList() {
       }
 
       const response = await axios.get(apiUrl);
-      // const response = await axios.get(
-      //   `http://localhost:4000/games?search=${searchTerm}`
-      // );
       setGames(response.data);
       setLoading(false);
     } catch (error) {
