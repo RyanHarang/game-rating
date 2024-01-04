@@ -69,7 +69,7 @@ export default function GameDetails() {
   return (
     <>
       <div className="game-details">
-        <Link to="/list" className="back-link">
+        <Link to="/" className="back-link">
           &#8592;
         </Link>
         {gameData ? (
