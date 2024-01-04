@@ -23,7 +23,7 @@ export default function Header() {
         </label>
         <ul className="menu">
           <li>
-            <Link to="/list" className="nav-link">
+            <Link to="/" className="nav-link">
               Games
             </Link>
           </li>
@@ -34,20 +34,13 @@ export default function Header() {
               </Link>
             </li>
           )}
-          {!isGuest && (
-            <li>
-              <Link to="/rating" className="nav-link">
-                Rate
-              </Link>
-            </li>
-          )}
           <li>
             <Link to="/register" className="nav-link">
               Register
             </Link>
           </li>
           <li>
-            <Link to="/" className="nav-link">
+            <Link to="/login" className="nav-link">
               {isGuest ? "Login" : "Logout"}
             </Link>
           </li>

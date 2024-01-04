@@ -25,7 +25,7 @@ export default function Login() {
         login(response.data.user);
         setMessage(<p className="success">{response.data.message}</p>);
         setTimeout(() => {
-          navigate("/list");
+          navigate("/");
         }, 600);
       } else {
         setMessage(<p className="error">{response.data.error}</p>);
