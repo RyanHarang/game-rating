@@ -62,13 +62,34 @@ router.post("/upload-game", upload.single("image"), async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const searchQuery = req.query.search || "";
-    const escapedSearchQuery = searchQuery.replace(
-      /[.*+?^${}()|[\]\\]/g,
-      "\\$&"
-    );
-    const games = await schemas.Game.find({
-      title: { $regex: new RegExp(escapedSearchQuery, "i") },
-    });
+    const currentUser = req.query.currentUser || "";
+    let query = {};
+
+    if (searchQuery) {
+      const escapedSearchQuery = searchQuery.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+      );
+      query.title = { $regex: new RegExp(escapedSearchQuery, "i") };
+    }
+
+    if (req.query.ratingFilter) {
+      const ratedGames = await schemas.Rating.find({
+        username: currentUser,
+      }).distinct("game");
+
+      if (!query.title) {
+        query.title = {};
+      }
+
+      if (req.query.ratingFilter === "Rated") {
+        query.title.$in = ratedGames;
+      } else if (req.query.ratingFilter === "NotRated") {
+        query.title.$nin = ratedGames;
+      }
+    }
+
+    const games = await schemas.Game.find(query).sort({ title: 1 });
     res.json(games);
   } catch (error) {
     console.error("Error fetching games:", error);

@@ -59,6 +59,16 @@ body {
   display: none;
 }
 
+/* Seach Methods */
+.search-methods {
+  justify-content: center;
+  display: flex;
+}
+
+.filter {
+  margin: 0 5px;
+}
+
 /* Scroll Buttom */
 .scroll-to-top {
   position: fixed;
