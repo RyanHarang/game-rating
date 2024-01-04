@@ -34,7 +34,7 @@ export default function Register() {
         <p className="success">
           {response.data}
           <br />
-          <Link to="/" className="login-link">
+          <Link to="/login" className="login-link">
             Login here
           </Link>
         </p>
