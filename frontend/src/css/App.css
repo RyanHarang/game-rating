@@ -121,6 +121,9 @@ body {
 @media only screen and (max-width: 767px) {
   .nav-bar {
     padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    background-color: rgba(40, 40, 40, 0.9);
     display: flex;
     justify-content: space-between;
   }
@@ -156,7 +159,7 @@ body {
     position: absolute;
     top: 35px;
     right: 0;
-    background: rgba(55, 55, 55, 0.8);
+    background-color: rgba(40, 40, 40, 0.9);
   }
 
   .menu-toggle:checked+.menu-icon+.menu {
