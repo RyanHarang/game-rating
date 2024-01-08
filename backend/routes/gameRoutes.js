@@ -22,6 +22,7 @@ const s3 = new S3Client({
   region: process.env.BUCKET_REGION,
 });
 
+// Route for uploading games
 router.post("/upload-game", upload.single("image"), async (req, res) => {
   try {
     const { title, site } = req.body;
@@ -59,12 +60,12 @@ router.post("/upload-game", upload.single("image"), async (req, res) => {
   }
 });
 
+// Route for filtering games
 router.get("/", async (req, res) => {
   try {
     const searchQuery = req.query.search || "";
     const currentUser = req.query.currentUser || "";
     let query = {};
-
     if (searchQuery) {
       const escapedSearchQuery = searchQuery.replace(
         /[.*+?^${}()|[\]\\]/g,
@@ -72,23 +73,19 @@ router.get("/", async (req, res) => {
       );
       query.title = { $regex: new RegExp(escapedSearchQuery, "i") };
     }
-
     if (req.query.ratingFilter) {
       const ratedGames = await schemas.Rating.find({
         username: currentUser,
       }).distinct("game");
-
       if (!query.title) {
         query.title = {};
       }
-
       if (req.query.ratingFilter === "Rated") {
         query.title.$in = ratedGames;
       } else if (req.query.ratingFilter === "NotRated") {
         query.title.$nin = ratedGames;
       }
     }
-
     const games = await schemas.Game.find(query).sort({ title: 1 });
     res.json(games);
   } catch (error) {
@@ -97,6 +94,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Route for returning ratings for a game
 router.get("/:name", async (req, res) => {
   const name = req.params.name;
   try {
@@ -112,6 +110,7 @@ router.get("/:name", async (req, res) => {
   }
 });
 
+// Route for deleting games
 router.delete("/:title", async (req, res) => {
   const title = req.params.title;
   try {
@@ -133,6 +132,50 @@ router.delete("/:title", async (req, res) => {
   }
 });
 
+// Route for updating games
+router.put("/:title", upload.single("image"), async (req, res) => {
+  const title = req.params.title;
+  try {
+    const existingGame = await schemas.Game.findOne({ title });
+    if (!existingGame) {
+      return res.status(404).send(`Game with title ${title} not found`);
+    }
+    const oldImageKey = getS3KeyFromUrl(existingGame.imageUrl);
+    existingGame.title = req.body.title || existingGame.title;
+    existingGame.site = req.body.site || existingGame.site;
+    if (req.file) {
+      if (oldImageKey) {
+        await deleteS3Object(oldImageKey);
+      }
+      const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
+      const webpData = await sharp(req.file.buffer)
+        .webp({ quality: 80 })
+        .toBuffer();
+      const webpKey = `${timestamp}_${req.file.originalname.replace(
+        /\.[^/.]+$/,
+        ""
+      )}.webp`;
+
+      const params = {
+        Bucket: process.env.BUCKET_NAME,
+        Key: webpKey,
+        Body: webpData,
+        ContentType: "image/webp",
+      };
+      const command = new PutObjectCommand(params);
+      await s3.send(command);
+      const s3Url = `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${webpKey}`;
+      existingGame.imageUrl = s3Url;
+    }
+    await existingGame.save();
+    res.send(`${title} updated successfully`);
+  } catch (error) {
+    console.error(`Error updating ${title}:`, error);
+    res.status(500).send(`Failed to update ${title}`);
+  }
+});
+
+// Additional methods for S3 behavior
 function getS3KeyFromUrl(url) {
   try {
     const urlObject = new URL(url);
@@ -151,12 +194,10 @@ async function deleteS3Object(key) {
     },
     region: process.env.BUCKET_REGION,
   });
-
   const params = {
     Bucket: process.env.BUCKET_NAME,
     Key: key,
   };
-
   try {
     const command = new DeleteObjectCommand(params);
     await s3.send(command);
