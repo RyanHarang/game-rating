@@ -4,7 +4,7 @@ import { useAuth } from "../components/AuthContext";
 import Logo from "../images/logo.png";
 
 export default function Header() {
-  const { isGuest, user } = useAuth();
+  const { isGuest, isAdmin, user } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLinkClick = () => {
@@ -55,7 +55,7 @@ export default function Header() {
               {isGuest ? "Login" : "Logout"}
             </Link>
           </li>
-          {user === "Ryan H" && (
+          {isAdmin && (
             <li>
               <Link to="/admin" className="nav-link" onClick={handleLinkClick}>
                 Admin

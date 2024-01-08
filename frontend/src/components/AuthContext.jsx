@@ -6,20 +6,24 @@ const AuthContext = createContext();
 export const AuthProvider = React.memo(({ children }) => {
   const [user, setUser] = useState(null);
   const [isGuest, setIsGuest] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const login = (userData) => {
-    setUser(userData);
+  const login = (username, admin) => {
+    setUser(username);
     setIsGuest(false);
+    setIsAdmin(admin);
   };
 
   const logout = () => {
     setUser(null);
+    setIsAdmin(false);
     setIsGuest(true);
   };
 
   const contextValue = {
     user,
     isGuest,
+    isAdmin,
     login,
     logout,
   };

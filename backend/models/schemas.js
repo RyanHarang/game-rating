@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  isAdmin: { type: Boolean, required: true },
   entryDate: { type: Date, default: Date.now },
 });
 userSchema.index({ username: 1 });
@@ -24,7 +25,7 @@ const gameSchema = new Schema({
 gameSchema.index({ title: 1 });
 
 const requestSchema = new Schema({
-  title: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
   site: { type: String, required: true },
   imageUrl: { type: String, required: true },
   entryDate: { type: Date, default: Date.now },

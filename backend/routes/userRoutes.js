@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const schemas = require("../models/schemas");
 
+// Route for logging in
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -14,13 +15,20 @@ router.post("/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-    res.status(200).json({ message: "Login successful", user: user.username });
+    res
+      .status(200)
+      .json({
+        message: "Login successful",
+        user: user.username,
+        isAdmin: user.isAdmin,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+// Route for deleting users
 router.delete("/:username", async (req, res) => {
   const username = req.params.username;
   try {
@@ -33,6 +41,7 @@ router.delete("/:username", async (req, res) => {
   }
 });
 
+// Route for registering new users
 router.post("/upload-user", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -41,7 +50,11 @@ router.post("/upload-user", async (req, res) => {
       return res.status(400).send("Username already exists");
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new schemas.User({ username, password: hashedPassword });
+    const newUser = new schemas.User({
+      username,
+      password: hashedPassword,
+      isAdmin: false,
+    });
     await newUser.save();
     res.send("Registered");
   } catch (error) {

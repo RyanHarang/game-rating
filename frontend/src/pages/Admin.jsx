@@ -4,7 +4,7 @@ import RequestCard from "../components/RequestCard";
 import axios from "axios";
 
 export default function Admin() {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [requests, setRequests] = useState([]);
   const [gamesList, setGamesList] = useState([]);
   const [usersList, setUsersList] = useState([]);
@@ -16,7 +16,9 @@ export default function Admin() {
     if (user === "Ryan H") {
       fetchUsersAndGames();
     }
-    fetchRequests();
+    if (isAdmin) {
+      fetchRequests();
+    }
   }, [requests]);
 
   const fetchUsersAndGames = async () => {
@@ -67,7 +69,7 @@ export default function Admin() {
     }
   };
 
-  if (user !== "Ryan H") {
+  if (!isAdmin) {
     return <p>Only an admin can access this page</p>;
   }
   return (

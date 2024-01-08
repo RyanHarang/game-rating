@@ -22,7 +22,8 @@ export default function Login() {
         postData
       );
       if (response.data.message) {
-        login(response.data.user);
+        console.log(response.data);
+        login(response.data.user, response.data.isAdmin);
         setMessage(<p className="success">{response.data.message}</p>);
         setTimeout(() => {
           navigate("/");
