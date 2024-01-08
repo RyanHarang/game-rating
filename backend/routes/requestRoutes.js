@@ -61,15 +61,41 @@ router.post("/submit-request", upload.single("image"), async (req, res) => {
   }
 });
 
-// Route for deleting requests when they are denied
-router.delete("/:title", async (req, res) => {
+// Route for getting all requests
+router.get("/", async (req, res) => {
+  try {
+    const requests = await schemas.Request.find();
+    res.json(requests);
+  } catch (error) {
+    console.error("Error fetching requests:", error);
+    res.status(500).send("Failed to fetch requests");
+  }
+});
+
+router.delete("/approve/:title", async (req, res) => {
   const title = req.params.title;
   try {
     const request = await schemas.Request.findOne({ title });
     if (!request) {
       return res.status(404).send(`Request with title ${title} not found`);
     }
-    const s3Url = game.imageUrl;
+    await schemas.Request.deleteOne({ title });
+    res.send(`Request with title ${title} deleted successfully`);
+  } catch (error) {
+    console.error(`Error deleting request with title ${title}`, error);
+    res.status(500).send(`Failed to delete request with  title ${title}`);
+  }
+});
+
+// Route for deleting requests when they are denied
+router.delete("/deny/:title", async (req, res) => {
+  const title = req.params.title;
+  try {
+    const request = await schemas.Request.findOne({ title });
+    if (!request) {
+      return res.status(404).send(`Request with title ${title} not found`);
+    }
+    const s3Url = request.imageUrl;
     const s3Key = getS3KeyFromUrl(s3Url);
     await deleteS3Object(s3Key);
     await schemas.Request.deleteOne({ title });

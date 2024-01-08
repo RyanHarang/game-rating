@@ -25,32 +25,15 @@ const s3 = new S3Client({
 // Route for uploading games
 router.post("/upload-game", upload.single("image"), async (req, res) => {
   try {
-    const { title, site } = req.body;
+    const { title, site, imageUrl } = req.body;
     const existingGame = await schemas.Game.findOne({ title });
     if (existingGame) {
       return res.status(400).send("A game with the same title already exists.");
     }
-    const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
-    const webpData = await sharp(req.file.buffer)
-      .webp({ quality: 80 })
-      .toBuffer();
-    const webpKey = `${timestamp}_${req.file.originalname.replace(
-      /\.[^/.]+$/,
-      ""
-    )}.webp`;
-    const params = {
-      Bucket: process.env.BUCKET_NAME,
-      Key: webpKey,
-      Body: webpData,
-      ContentType: "image/webp",
-    };
-    const command = new PutObjectCommand(params);
-    await s3.send(command);
-    const s3Url = `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${webpKey}`;
     const newGame = new schemas.Game({
       title,
       site,
-      imageUrl: s3Url,
+      imageUrl,
     });
     await newGame.save();
     res.send("Game added");
