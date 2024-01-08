@@ -100,10 +100,19 @@ input[type="range"] {
     background-color: #bbb;
 }
 
+/* Update Form */
+.update-game {
+    margin: 0 auto;
+    max-width: 650px;
+    border: 1px solid #ddd;
+}
+
 /* Admin */
 .dropdown {
     width: 120px;
 }
+
+
 
 .delete {
     background-color: #ff0048;
