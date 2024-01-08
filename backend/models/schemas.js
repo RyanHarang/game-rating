@@ -22,10 +22,20 @@ const gameSchema = new Schema({
   entryDate: { type: Date, default: Date.now },
 });
 gameSchema.index({ title: 1 });
+
+const requestSchema = new Schema({
+  title: { type: String, required: true, unique: true },
+  site: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  entryDate: { type: Date, default: Date.now },
+});
+requestSchema.index({ title: 1 });
+
 // name, schema, database
 const User = mongoose.model("User", userSchema, "users");
 const Rating = mongoose.model("Rating", ratingSchema, "ratings");
 const Game = mongoose.model("Game", gameSchema, "games");
-const mySchemas = { User: User, Rating: Rating, Game: Game };
+const Request = mongoose.model("Request", requestSchema, "requests");
+const mySchemas = { User: User, Rating: Rating, Game: Game, Request, Request };
 
 module.exports = mySchemas;
