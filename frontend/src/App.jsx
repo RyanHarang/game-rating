@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./css/App.css";
+import "./css/RequestCard.css";
 import "./css/GameCard.css";
 import "./css/GameDetails.css";
 import "./css/Forms.css";
