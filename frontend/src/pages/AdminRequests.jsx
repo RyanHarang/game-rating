@@ -29,11 +29,15 @@ export default function AdminRequests() {
   return (
     <>
       <AdminHeader />
-      <div className="request-grid">
-        {requests.map((request) => (
-          <RequestCard key={request._id} request={request} />
-        ))}
-      </div>
+      {requests.length > 0 ? (
+        <div className="request-grid">
+          {requests.map((request) => (
+            <RequestCard key={request._id} request={request} />
+          ))}
+        </div>
+      ) : (
+        <p className="message">No requests to display</p>
+      )}
     </>
   );
 }
