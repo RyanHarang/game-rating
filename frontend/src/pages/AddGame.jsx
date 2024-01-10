@@ -9,10 +9,6 @@ export default function AddGame() {
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState("");
 
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-  };
-
   const axiosPostData = async () => {
     try {
       const formData = new FormData();
@@ -89,7 +85,7 @@ export default function AddGame() {
               id="image"
               name="image"
               accept="image/*"
-              onChange={handleImageChange}
+              onChange={(e) => setImage(e.target.files[0])}
               className="field"
             />
             <button type="submit" className="process">
