@@ -85,7 +85,7 @@ export default function AdminUpdate() {
     <>
       <AdminHeader />
       <div className="form-container">
-        <h1 className="form-title">Update Games</h1>
+        <h1 className="form-title">Update Game</h1>
         <form onSubmit={handleFormSubmit} className="update-form">
           <label>Select Game:</label>
           <br />
