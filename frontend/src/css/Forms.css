@@ -1,11 +1,11 @@
 /* General Form Styling */
 .form-container {
-    max-width: 25vw;
-    margin: 0 auto;
+  max-width: 25vw;
+  margin: 0 auto;
 }
 
 .form-title {
-    text-align: center;
+  text-align: center;
 }
 
 .login-form,
@@ -13,126 +13,129 @@
 .rating-form,
 .game-form,
 .update-form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .field {
-    padding: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 .field:focus {
-    outline: 1px solid #ccc;
+  outline: 1px solid #ccc;
 }
 
 .custom-select {
-    position: relative;
-    max-width: 100%;
+  position: relative;
+  max-width: 100%;
 }
 
 .process {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .process:hover {
-    color: #eee;
-    background-color: #45a049;
+  color: #eee;
+  background-color: #45a049;
 }
 
 /* Login Form */
 .logout {
-    margin-top: 10px;
+  margin-top: 10px;
+  background-color: #4d74d0;
+}
+
+.logout:hover {
+  background-color: #4973cf;
 }
 
 /* Register Form */
 .login-link {
-    color: #bbb;
+  color: #bbb;
 }
 
 .login-link:hover {
-    color: #ddd;
+  color: #ddd;
 }
 
 /* Rating Form */
 .score-display {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* Score Input & Slider Styling */
 .score-input {
-    padding: 8px;
-    text-align: center;
+  padding: 8px;
+  text-align: center;
 }
 
 .score-slider {
-    margin: 12px 0;
+  margin: 12px 0;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    background-color: #45a049;
-    height: 20px;
+  background-color: #45a049;
+  height: 20px;
 }
 
 input[type="range"]::-moz-range-thumb {
-    background-color: #45a049;
-    height: 20px;
+  background-color: #45a049;
+  height: 20px;
 }
 
 input[type="range"] {
-    width: 100%;
-    height: 8px;
-    border-radius: 2px;
-    background-color: #bbb;
+  width: 100%;
+  height: 8px;
+  border-radius: 2px;
+  background-color: #bbb;
 }
 
 /* Update Form */
 .update-game {
-    margin: 0 auto;
-    max-width: 650px;
-    border: 1px solid #ddd;
+  margin: 0 auto;
+  max-width: 650px;
+  border: 1px solid #ddd;
 }
 
 /* Admin */
 .dropdown {
-    width: 120px;
+  width: 120px;
 }
 
-
-
 .delete {
-    background-color: #ff0048;
-    width: 120px;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: #ff0048;
+  width: 120px;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .delete:hover {
-    color: #eee;
-    background-color: #d91f54;
+  color: #eee;
+  background-color: #d91f54;
 }
 
 @media only screen and (max-width: 767px) {
-    .form-container {
-        max-width: 350px;
-    }
+  .form-container {
+    max-width: 350px;
+  }
 }
