@@ -59,6 +59,21 @@ body {
   display: none;
 }
 
+.admin-header {
+  display: flex;
+  justify-content: center;
+  background: rgba(70, 70, 70, 0.9);
+}
+
+.admin-header ul {
+  list-style: none;
+  display: flex;
+}
+
+.admin-header ul li {
+  padding-left: 2rem;
+}
+
 /* Seach Methods */
 .search-methods {
   justify-content: center;
@@ -162,7 +177,7 @@ body {
     background-color: rgba(40, 40, 40, 0.9);
   }
 
-  .menu-toggle:checked+.menu-icon+.menu {
+  .menu-toggle:checked + .menu-icon + .menu {
     display: flex;
   }
 
