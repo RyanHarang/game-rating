@@ -7,7 +7,7 @@ export default function AdminHeader() {
 
   return (
     <>
-      <nav className="nav-bar">
+      <nav className="admin-header">
         <ul className="menu">
           <li>
             <Link to="/requests" className="nav-link">
