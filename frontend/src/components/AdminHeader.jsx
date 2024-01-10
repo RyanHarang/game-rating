@@ -22,7 +22,7 @@ export default function AdminHeader() {
           {user === "Ryan H" && (
             <li>
               <Link to="/deletions" className="admin-link">
-                Admin
+                Deletions
               </Link>
             </li>
           )}
