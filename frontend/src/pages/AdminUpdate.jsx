@@ -32,19 +32,11 @@ export default function AdminUpdate() {
   const handleGameSelect = (e) => {
     setSelectedGame(e.target.value);
     setTitle(e.target.value);
-    // Optionally, you can set the title and site fields based on the selected game
-    // const selectedGameData = games.find(
-    //   (game) => game.title === e.target.value
-    // );
-    // if (selectedGameData) {
-    //   setTitle(selectedGameData.title);
-    // }
   };
 
   const handleTitleChange = (e) => {
     const enteredTitle = e.target.value;
     setTitle(enteredTitle);
-    // Filter the games based on the entered title
     const filtered = games.filter((game) =>
       game.title.toLowerCase().includes(enteredTitle.toLowerCase())
     );
@@ -81,7 +73,6 @@ export default function AdminUpdate() {
       setImage(null);
       setSelectedGame("");
       setFilteredGames(games);
-      // console.log(response.data);
     } catch (error) {
       console.error("Error updating game:", error);
     }
@@ -96,53 +87,44 @@ export default function AdminUpdate() {
       <div className="form-container">
         <h1 className="form-title">Update Games</h1>
         <form onSubmit={handleFormSubmit} className="update-form">
-          <div>
-            <label>Select Game:</label>
-            <select
-              value={selectedGame}
-              onChange={handleGameSelect}
-              className="field"
-            >
-              <option value="" className="field">
-                Select a Game
+          <label>Select Game:</label>
+          <br />
+          <select
+            value={selectedGame}
+            onChange={handleGameSelect}
+            className="field"
+          >
+            <option value="">Select a Game</option>
+            {filteredGames.map((game) => (
+              <option key={game._id} value={game.title}>
+                {game.title}
               </option>
-              {filteredGames.map((game) => (
-                <option key={game._id} value={game.title}>
-                  {game.title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label>Title:</label>
-            <br />
-            <input
-              type="text"
-              value={title}
-              onChange={handleTitleChange}
-              className="field"
-              required
-            />
-          </div>
-          <div>
-            <label>Site:</label>
-            <br />
-            <input
-              type="text"
-              value={site}
-              onChange={(e) => setSite(e.target.value)}
-              className="field"
-            />
-          </div>
-          <div>
-            <label>Image:</label>
-            <br />
-            <input
-              type="file"
-              onChange={(e) => setImage(e.target.files[0])}
-              className="field"
-            />
-          </div>
+            ))}
+          </select>
+          <label>Title:</label>
+          <br />
+          <input
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
+            className="field"
+            required
+          />
+          <label>Site:</label>
+          <br />
+          <input
+            type="text"
+            value={site}
+            onChange={(e) => setSite(e.target.value)}
+            className="field"
+          />
+          <label>Image:</label>
+          <br />
+          <input
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            className="field"
+          />
           <button type="submit" className="process">
             Update Game
           </button>
