@@ -7,21 +7,21 @@ export default function AdminHeader() {
 
   return (
     <>
-      <nav className="admin-header">
-        <ul className="menu">
+      <nav className="admin-nav">
+        <ul>
           <li>
-            <Link to="/requests" className="nav-link">
+            <Link to="/requests" className="admin-link">
               Requests
             </Link>
           </li>
           <li>
-            <Link to="/updates" className="nav-link">
+            <Link to="/updates" className="admin-link">
               Update
             </Link>
           </li>
           {user === "Ryan H" && (
             <li>
-              <Link to="/deletions" className="nav-link">
+              <Link to="/deletions" className="admin-link">
                 Admin
               </Link>
             </li>

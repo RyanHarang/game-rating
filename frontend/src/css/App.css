@@ -59,19 +59,31 @@ body {
   display: none;
 }
 
-.admin-header {
+.admin-nav {
   display: flex;
   justify-content: center;
   background: rgba(70, 70, 70, 0.9);
 }
 
-.admin-header ul {
+.admin-nav ul {
   list-style: none;
   display: flex;
+  padding: 1rem 0;
+  margin: 0;
 }
 
-.admin-header ul li {
-  padding-left: 2rem;
+.admin-nav ul li {
+  padding: 0 1rem;
+}
+
+.admin-link {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #8995eb;
+}
+
+.admin-link:hover {
+  color: #7581d7;
 }
 
 /* Seach Methods */
