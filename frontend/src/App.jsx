@@ -10,7 +10,9 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AddGame from "./pages/AddGame";
 import GameDetails from "./pages/GameDetails";
-import Admin from "./pages/Admin";
+import AdminDeletions from "./pages/AdminDeletions";
+import AdminUpdates from "./pages/AdminUpdate";
+import AdminRequests from "./pages/AdminRequests";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -25,7 +27,9 @@ export default function App() {
           <Route path="/add" element={<AddGame />} />
           <Route path="/register" element={<Register />} />
           <Route path="/game/:name" element={<GameDetails />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/requests" element={<AdminRequests />} />
+          <Route path="/updates" element={<AdminUpdates />} />
+          <Route path="/deletions" element={<AdminDeletions />} />
         </Routes>
         <Footer />
       </BrowserRouter>

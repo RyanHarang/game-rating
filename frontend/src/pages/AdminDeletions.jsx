@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../components/AuthContext";
-import RequestCard from "../components/RequestCard";
+import AdminHeader from "../components/AdminHeader";
 import axios from "axios";
 
-export default function Admin() {
-  const { user, isAdmin } = useAuth();
-  const [requests, setRequests] = useState([]);
+export default function AdminDelete() {
+  const { user } = useAuth();
   const [gamesList, setGamesList] = useState([]);
   const [usersList, setUsersList] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
@@ -16,10 +15,7 @@ export default function Admin() {
     if (user === "Ryan H") {
       fetchUsersAndGames();
     }
-    if (isAdmin) {
-      fetchRequests();
-    }
-  }, [requests]);
+  }, []);
 
   const fetchUsersAndGames = async () => {
     try {
@@ -31,15 +27,6 @@ export default function Admin() {
       setGamesList(gamesResponse.data);
     } catch (error) {
       console.error("Error fetching users and games:", error);
-    }
-  };
-
-  const fetchRequests = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/requests");
-      setRequests(response.data);
-    } catch (error) {
-      console.error("Error fetching requests:", error);
     }
   };
 
@@ -69,16 +56,13 @@ export default function Admin() {
     }
   };
 
-  if (!isAdmin) {
-    return <p>Only an admin can access this page</p>;
+  if (user !== "Ryan H") {
+    return <p>You cannot access this page</p>;
   }
+
   return (
     <>
-      <div className="request-grid">
-        {requests.map((request) => (
-          <RequestCard key={request._id} request={request} />
-        ))}
-      </div>
+      <AdminHeader />
       <div className="deletion">
         <form onSubmit={handleUserDelete}>
           <select

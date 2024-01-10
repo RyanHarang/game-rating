@@ -11,7 +11,8 @@
 .login-form,
 .register-form,
 .rating-form,
-.game-form {
+.game-form,
+.update-form {
     display: flex;
     flex-direction: column;
 }

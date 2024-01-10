@@ -57,7 +57,11 @@ export default function Header() {
           </li>
           {isAdmin && (
             <li>
-              <Link to="/admin" className="nav-link" onClick={handleLinkClick}>
+              <Link
+                to="/requests"
+                className="nav-link"
+                onClick={handleLinkClick}
+              >
                 Admin
               </Link>
             </li>
