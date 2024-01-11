@@ -118,13 +118,22 @@ router.delete("/:title", async (req, res) => {
 // Route for updating games
 router.put("/:title", upload.single("image"), async (req, res) => {
   const title = req.params.title;
+  const newTitle = req.body.title;
   try {
+    // Prevent games with duplicate names
     const existingGame = await schemas.Game.findOne({ title });
     if (!existingGame) {
       return res.status(404).send(`Game with title ${title} not found`);
     }
     const oldImageKey = getS3KeyFromUrl(existingGame.imageUrl);
-    existingGame.title = req.body.title || existingGame.title;
+    // If title is updated, update ratings as well with the new title
+    if (title !== newTitle) {
+      await schemas.Rating.updateMany(
+        { game: title },
+        { $set: { game: newTitle } }
+      );
+    }
+    existingGame.title = newTitle || existingGame.title;
     existingGame.site = req.body.site || existingGame.site;
     if (req.file) {
       if (oldImageKey) {

@@ -8,6 +8,7 @@ export default function AdminUpdate() {
   const [games, setGames] = useState([]);
   const [filteredGames, setFilteredGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState("");
+  const [newTitle, setNewTitle] = useState("");
   const [title, setTitle] = useState("");
   const [site, setSite] = useState("");
   const [image, setImage] = useState(null);
@@ -49,13 +50,13 @@ export default function AdminUpdate() {
       setMessage(<p className="required">Please select a game</p>);
       return;
     }
-    if (!title && !image && !site) {
+    if (!newTitle && !image && !site) {
       setMessage(<p className="required">Please update a field</p>);
       return;
     }
     try {
       const formData = new FormData();
-      formData.append("title", title);
+      formData.append("title", newTitle);
       formData.append("site", site);
       formData.append("image", image);
       const response = await axios.put(
@@ -101,7 +102,6 @@ export default function AdminUpdate() {
               </option>
             ))}
           </select>
-          <label>Title:</label>
           <br />
           <input
             type="text"
@@ -109,6 +109,14 @@ export default function AdminUpdate() {
             onChange={handleTitleChange}
             className="field"
             required
+          />
+          <label>New Title:</label>
+          <br />
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            className="field"
           />
           <label>Site:</label>
           <br />
