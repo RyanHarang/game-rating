@@ -40,7 +40,7 @@ label {
 
 .process {
   background-color: #4caf50;
-  color: white;
+  color: #fff;
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -121,7 +121,7 @@ input[type="range"] {
 .delete {
   background-color: #ff0048;
   width: 120px;
-  color: white;
+  color: #fff;
   padding: 10px;
   border: none;
   border-radius: 4px;

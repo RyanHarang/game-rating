@@ -58,16 +58,14 @@ const RequestCard = ({ request }) => {
       <div className="request-actions">
         <button
           onClick={() => handleApprove()}
-          className={`approve ${
-            isApproved || isDenied ? "disabled" : "process"
-          }`}
+          className={`approve ${isApproved || isDenied ? "disabled" : ""}`}
           disabled={isApproved || isDenied}
         >
           Approve
         </button>
         <button
           onClick={() => handleDeny()}
-          className={`deny ${isApproved || isDenied ? "disabled" : "delete"}`}
+          className={`deny ${isApproved || isDenied ? "disabled" : ""}`}
           disabled={isApproved || isDenied}
         >
           Deny
