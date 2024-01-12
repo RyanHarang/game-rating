@@ -90,7 +90,7 @@ export default function GameList() {
                 className="field filter"
               >
                 <option value="None">None</option>
-                <option value="Ranked">Ranked Order</option>
+                <option value="Ranked">Average Score</option>
                 <option value="Rated">Rated</option>
                 <option value="NotRated">Not Rated</option>
               </select>
