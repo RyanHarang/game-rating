@@ -9,7 +9,10 @@ export default function GameList() {
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [ratingFilter, setRatingFilter] = useState("None");
+  const [ratingFilter, setRatingFilter] = useState(() => {
+    const storedRatingFilter = localStorage.getItem("gameListRatingFilter");
+    return storedRatingFilter || "None";
+  });
   const [scrollPosition, setScrollPosition] = useState(() => {
     const storedScrollPosition = localStorage.getItem("gameListScrollPosition");
     return storedScrollPosition ? parseInt(storedScrollPosition, 10) : 0;
@@ -18,6 +21,10 @@ export default function GameList() {
   useEffect(() => {
     localStorage.setItem("gameListScrollPosition", scrollPosition.toString());
   }, [scrollPosition]);
+
+  useEffect(() => {
+    localStorage.setItem("gameListRatingFilter", ratingFilter);
+  }, [ratingFilter]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -32,20 +39,18 @@ export default function GameList() {
 
   useEffect(() => {
     fetchGames();
-  }, [searchTerm, ratingFilter, user]);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchGames();
+  }, [ratingFilter, user]);
 
   const fetchGames = async () => {
     try {
-      let apiUrl = `http://localhost:4000/games?search=${searchTerm}`;
-      if (!isGuest) {
-        apiUrl += `&currentUser=${user}`;
-        if (ratingFilter === "Rated") {
-          apiUrl += `&ratingFilter=Rated`;
-        } else if (ratingFilter === "NotRated" && !isGuest) {
-          apiUrl += `&ratingFilter=NotRated`;
-        }
-      }
-
+      const apiUrl = `http://localhost:4000/games?search=${searchTerm}&currentUser=${
+        isGuest ? "" : user
+      }&ratingFilter=${ratingFilter}`;
       const response = await axios.get(apiUrl);
       setGames(response.data);
       setLoading(false);
@@ -85,6 +90,7 @@ export default function GameList() {
                 className="field filter"
               >
                 <option value="None">None</option>
+                <option value="Ranked">Ranked Order</option>
                 <option value="Rated">Rated</option>
                 <option value="NotRated">Not Rated</option>
               </select>

@@ -49,6 +49,7 @@ router.get("/", async (req, res) => {
     const searchQuery = req.query.search || "";
     const currentUser = req.query.currentUser || "";
     let query = {};
+
     if (searchQuery) {
       const escapedSearchQuery = searchQuery.replace(
         /[.*+?^${}()|[\]\\]/g,
@@ -56,21 +57,59 @@ router.get("/", async (req, res) => {
       );
       query.title = { $regex: new RegExp(escapedSearchQuery, "i") };
     }
+
     if (req.query.ratingFilter) {
-      const ratedGames = await schemas.Rating.find({
-        username: currentUser,
-      }).distinct("game");
-      if (!query.title) {
-        query.title = {};
-      }
-      if (req.query.ratingFilter === "Rated") {
-        query.title.$in = ratedGames;
-      } else if (req.query.ratingFilter === "NotRated") {
-        query.title.$nin = ratedGames;
+      if (req.query.ratingFilter === "None") {
+        const games = await schemas.Game.find(query).sort({ title: 1 });
+        res.json(games);
+      } else if (req.query.ratingFilter === "Ranked") {
+        const aggregatePipeline = [
+          {
+            $match: query,
+          },
+          {
+            $lookup: {
+              from: "ratings",
+              localField: "title",
+              foreignField: "game",
+              as: "ratings",
+            },
+          },
+          {
+            $unwind: "$ratings",
+          },
+          {
+            $group: {
+              _id: "$_id",
+              title: { $first: "$title" },
+              site: { $first: "$site" },
+              imageUrl: { $first: "$imageUrl" },
+              avgRating: { $avg: "$ratings.score" },
+            },
+          },
+          {
+            $sort: { avgRating: -1 },
+          },
+        ];
+        const games = await schemas.Game.aggregate(aggregatePipeline);
+        res.json(games);
+      } else {
+        const ratedGames = await schemas.Rating.find({
+          username: currentUser,
+        }).distinct("game");
+        if (!query.title) {
+          query.title = {};
+        }
+        if (req.query.ratingFilter === "Rated") {
+          query.title.$in = ratedGames;
+        } else if (req.query.ratingFilter === "NotRated") {
+          query.title.$nin = ratedGames;
+        }
+
+        const games = await schemas.Game.find(query).sort({ title: 1 });
+        res.json(games);
       }
     }
-    const games = await schemas.Game.find(query).sort({ title: 1 });
-    res.json(games);
   } catch (error) {
     console.error("Error fetching games:", error);
     res.status(500).send("Failed to fetch games");
