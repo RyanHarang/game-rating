@@ -83,7 +83,7 @@ export default function GameList() {
         {!isGuest && (
           <div className="filter-bar">
             <label>
-              Filter By
+              Filter
               <select
                 value={ratingFilter}
                 onChange={handleRatingFilterChange}
@@ -103,7 +103,7 @@ export default function GameList() {
             placeholder="Search for a game"
             value={searchTerm}
             onChange={handleSearchChange}
-            className="field"
+            className="field search"
           />
         </div>
       </div>
