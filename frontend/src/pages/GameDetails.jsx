@@ -85,7 +85,9 @@ export default function GameDetails() {
               className="details-image"
             />
             {isGuest ? (
-              <p>Login to rate games</p>
+              <Link to="/login" className="login-link">
+                Login to rate games
+              </Link>
             ) : (
               <form
                 className="rating-form details-form"
