@@ -22,7 +22,9 @@ export default function AdminDelete() {
       const usersResponse = await axios.get(
         "http://localhost:4000/users/all-users"
       );
-      const gamesResponse = await axios.get("http://localhost:4000/games");
+      const gamesResponse = await axios.get(
+        "http://localhost:4000/games/all-games"
+      );
       setUsersList(usersResponse.data);
       setGamesList(gamesResponse.data);
     } catch (error) {

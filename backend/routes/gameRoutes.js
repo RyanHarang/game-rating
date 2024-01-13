@@ -22,6 +22,17 @@ const s3 = new S3Client({
   region: process.env.BUCKET_REGION,
 });
 
+// Route for fetching all game names
+router.get("/all-games", async (req, res) => {
+  try {
+    const games = await schemas.Game.find();
+    res.json(games);
+  } catch (error) {
+    console.error("Error fetching all games:", error);
+    res.status(500).send("Failed to fetch all games");
+  }
+});
+
 // Route for uploading games
 router.post("/upload-game", upload.single("image"), async (req, res) => {
   try {
@@ -40,6 +51,22 @@ router.post("/upload-game", upload.single("image"), async (req, res) => {
   } catch (error) {
     console.error("Error adding game:", error);
     res.status(500).send("Failed to add game");
+  }
+});
+
+// Route for returning ratings for a game
+router.get("/:name", async (req, res) => {
+  const name = req.params.name;
+  try {
+    const game = await schemas.Game.findOne({ title: name });
+    if (!game) {
+      return res.status(404).json({ message: "Game not found" });
+    }
+    const ratings = await schemas.Rating.find({ game: name });
+    res.json({ game, ratings });
+  } catch (error) {
+    console.error("Error fetching game details:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
@@ -113,22 +140,6 @@ router.get("/", async (req, res) => {
   } catch (error) {
     console.error("Error fetching games:", error);
     res.status(500).send("Failed to fetch games");
-  }
-});
-
-// Route for returning ratings for a game
-router.get("/:name", async (req, res) => {
-  const name = req.params.name;
-  try {
-    const game = await schemas.Game.findOne({ title: name });
-    if (!game) {
-      return res.status(404).json({ message: "Game not found" });
-    }
-    const ratings = await schemas.Rating.find({ game: name });
-    res.json({ game, ratings });
-  } catch (error) {
-    console.error("Error fetching game details:", error);
-    res.status(500).json({ message: "Internal server error" });
   }
 });
 

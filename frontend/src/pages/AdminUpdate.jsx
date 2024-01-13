@@ -22,7 +22,7 @@ export default function AdminUpdate() {
 
   const fetchGames = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/games");
+      const response = await axios.get("http://localhost:4000/games/all-games");
       setGames(response.data);
       setFilteredGames(response.data);
     } catch (error) {
