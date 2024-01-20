@@ -19,6 +19,7 @@ export const AuthProvider = React.memo(({ children }) => {
     setIsAdmin(false);
     setIsGuest(true);
     localStorage.removeItem("gameListRatingFilter");
+    localStorage.removeItem("gameListScrollPosition");
   };
 
   const contextValue = {

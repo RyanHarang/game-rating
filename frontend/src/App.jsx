@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./css/App.css";
 import "./css/RequestCard.css";
@@ -17,6 +17,17 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 export default function App() {
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("gameListRatingFilter");
+      localStorage.removeItem("gameListScrollPosition");
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <>
       <BrowserRouter>
