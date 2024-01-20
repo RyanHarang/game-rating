@@ -130,11 +130,13 @@ export default function GameDetails() {
             <h3 className="info">All Ratings:</h3>
             <div className="ratings-container">
               <ul className="ratings-list">
-                {gameData.ratings.map((rating) => (
-                  <li key={rating._id}>
-                    {rating.username}: {rating.score}
-                  </li>
-                ))}
+                {gameData.ratings
+                  .sort((a, b) => b.score - a.score)
+                  .map((rating) => (
+                    <li key={rating._id}>
+                      {rating.username}: {rating.score}
+                    </li>
+                  ))}
               </ul>
             </div>
           </>
