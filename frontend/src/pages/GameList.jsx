@@ -10,20 +10,22 @@ export default function GameList() {
   const [games, setGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [ratingFilter, setRatingFilter] = useState(() => {
-    const storedRatingFilter = localStorage.getItem("gameListRatingFilter");
+    const storedRatingFilter = sessionStorage.getItem("gameListRatingFilter");
     return storedRatingFilter || "None";
   });
   const [scrollPosition, setScrollPosition] = useState(() => {
-    const storedScrollPosition = localStorage.getItem("gameListScrollPosition");
+    const storedScrollPosition = sessionStorage.getItem(
+      "gameListScrollPosition"
+    );
     return storedScrollPosition ? parseInt(storedScrollPosition, 10) : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem("gameListScrollPosition", scrollPosition.toString());
+    sessionStorage.setItem("gameListScrollPosition", scrollPosition.toString());
   }, [scrollPosition]);
 
   useEffect(() => {
-    localStorage.setItem("gameListRatingFilter", ratingFilter);
+    sessionStorage.setItem("gameListRatingFilter", ratingFilter);
   }, [ratingFilter]);
 
   useEffect(() => {

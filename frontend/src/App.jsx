@@ -19,8 +19,8 @@ import Footer from "./components/Footer";
 export default function App() {
   useEffect(() => {
     const handleBeforeUnload = () => {
-      localStorage.removeItem("gameListRatingFilter");
-      localStorage.removeItem("gameListScrollPosition");
+      sessionStorage.removeItem("gameListRatingFilter");
+      sessionStorage.removeItem("gameListScrollPosition");
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {

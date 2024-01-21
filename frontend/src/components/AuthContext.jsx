@@ -18,8 +18,8 @@ export const AuthProvider = React.memo(({ children }) => {
     setUser(null);
     setIsAdmin(false);
     setIsGuest(true);
-    localStorage.removeItem("gameListRatingFilter");
-    localStorage.removeItem("gameListScrollPosition");
+    sessionStorage.removeItem("gameListRatingFilter");
+    sessionStorage.removeItem("gameListScrollPosition");
   };
 
   const contextValue = {
